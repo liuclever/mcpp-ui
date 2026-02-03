@@ -1,0 +1,184 @@
+<!--pages/community/feed.wxml-->
+<view class="feed-container">
+  <!-- 顶部导航栏 -->
+  <view class="nav-bar">
+    <view class="back-btn" bindtap="goBack">
+      <text class="back-icon">←</text>
+      <text class="back-text">返回</text>
+    </view>
+  </view>
+
+  <!-- 视频滑动容器 -->
+  <swiper 
+    class="video-swiper" 
+    vertical="{{true}}"
+    current="{{currentIndex}}"
+    bindchange="onSwiperChange"
+    circular="{{false}}"
+    duration="{{300}}"
+  >
+    <swiper-item wx:for="{{videoList}}" wx:key="id" class="swiper-item">
+      <view class="video-wrapper">
+        <!-- 视频播放器 -->
+        <video
+          id="video-player-{{index}}"
+          class="video-player"
+          src="{{item.videoUrl}}"
+          poster="{{item.coverUrl}}"
+          autoplay="{{currentIndex === index}}"
+          loop="{{true}}"
+          controls="{{true}}"
+          show-center-play-btn="{{true}}"
+          show-play-btn="{{true}}"
+          enable-progress-gesture="{{false}}"
+          object-fit="contain"
+          bindplay="onVideoPlay"
+          bindpause="onVideoPause"
+          bindended="onVideoEnded"
+          binderror="onVideoError"
+        />
+        
+        <!-- 点击区域 - 用于暂停/播放，使用bindtap不阻止滑动 -->
+        <view class="video-tap-area" bindtap="onVideoTap" data-index="{{index}}"></view>
+
+        <!-- 视频信息层 -->
+        <view class="video-info">
+          <!-- 发布者信息 -->
+          <view class="author-info">
+            <image class="avatar" src="{{item.userAvatar || '/assets/images/default-avatar.png'}}" mode="aspectFill" />
+            <view class="author-details">
+              <text class="nickname">{{item.userName || '匿名用户'}}</text>
+              <text class="time">{{item.createTime}}</text>
+            </view>
+          </view>
+
+          <!-- 视频标题和描述 -->
+          <view class="video-desc">
+            <text class="title">{{item.title}}</text>
+            <text class="description" wx:if="{{item.description}}">{{item.description}}</text>
+            <view class="location" wx:if="{{item.location}}">
+              <text class="location-icon">📍</text>
+              <text class="location-text">{{item.location}}</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- 右侧互动栏 -->
+        <view class="interaction-side">
+          <interaction-bar
+            video-id="{{item.id}}"
+            is-liked="{{item.isLiked}}"
+            is-collected="{{item.isCollected}}"
+            likes="{{item.likes}}"
+            collects="{{item.collects}}"
+            comments="{{item.comments}}"
+            shares="{{item.shares}}"
+            layout="vertical"
+            bind:like="onLike"
+            bind:collect="onCollect"
+            bind:comment="onComment"
+            bind:share="onShare"
+          />
+        </view>
+      </view>
+    </swiper-item>
+  </swiper>
+
+  <!-- 加载状态 -->
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty" wx:if="{{!loading && videoList.length === 0}}">
+    <image class="empty-icon" src="/assets/images/empty-video.png" mode="aspectFit" />
+    <text class="empty-text">暂无视频</text>
+  </view>
+
+  <!-- 分享选择弹窗 -->
+  <view class="share-popup" wx:if="{{showSharePopup}}" catchtap="closeSharePopup">
+    <view class="share-popup-content" catchtap="onPopupContentTap">
+      <view class="share-popup-header">
+        <text class="share-title">分享到</text>
+        <view class="share-close" bindtap="closeSharePopup">
+          <text>×</text>
+        </view>
+      </view>
+      <view class="share-options">
+        <!-- 分享给微信好友 -->
+        <button class="share-option" open-type="share">
+          <view class="share-icon wechat-icon">
+            <text class="icon-text">微信</text>
+          </view>
+          <text class="share-label">微信好友</text>
+        </button>
+        <!-- 分享到朋友圈 -->
+        <view class="share-option" bindtap="shareToTimeline">
+          <view class="share-icon timeline-icon">
+            <text class="icon-text">圈</text>
+          </view>
+          <text class="share-label">朋友圈</text>
+        </view>
+      </view>
+      <view class="share-cancel" bindtap="closeSharePopup">
+        <text>取消</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 评论弹窗 -->
+  <view class="comment-popup" wx:if="{{showCommentPopup}}" catchtap="closeCommentPopup">
+    <view class="comment-popup-content" catchtap="onPopupContentTap">
+      <!-- 弹窗头部 -->
+      <view class="comment-popup-header">
+        <view class="related-product">
+          <text class="related-label">相关产品：</text>
+          <text class="product-name">福临门</text>
+        </view>
+        <view class="comment-popup-close" bindtap="closeCommentPopup">
+          <image src="/assets/icons/close.png" mode="aspectFit" />
+        </view>
+      </view>
+      
+      <!-- 评论数量 -->
+      <view class="comment-count">
+        <text>{{videoList[currentIndex].comments || 0}}条评论</text>
+      </view>
+      
+      <!-- 评论列表 -->
+      <view class="comment-popup-body" catchtap="onPopupContentTap">
+        <comment-list 
+          video-id="{{currentVideoId}}"
+          comments="{{comments}}"
+          has-more="{{commentHasMore}}"
+          loading="{{commentLoading}}"
+          show-empty="{{!commentLoading && comments.length === 0}}"
+          bind:reply="onCommentSuccess"
+        />
+      </view>
+      
+      <!-- 评论输入框 -->
+      <view class="comment-popup-footer">
+        <view class="comment-input-bar">
+          <input 
+            class="comment-input"
+            type="text"
+            placeholder="留下你的评论吧"
+            placeholder-class="comment-input-placeholder"
+            value="{{commentInputValue}}"
+            bindinput="onCommentInput"
+            bindconfirm="onCommentSubmit"
+            confirm-type="send"
+          />
+          <button 
+            class="comment-send-btn {{commentInputValue ? 'active' : ''}}"
+            bindtap="onCommentSubmit"
+            disabled="{{!commentInputValue || commentSubmitting}}"
+          >
+            发送
+          </button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

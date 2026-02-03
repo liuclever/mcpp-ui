@@ -1,0 +1,203 @@
+<view class="container">
+  <!-- 顶图横幅 -->
+  <page-banner pageKey="product" position="top"></page-banner>
+
+  <!-- 顶部导航栏 -->
+  <nav-bar title="产品分类" showBack="{{true}}"></nav-bar>
+
+  <!-- 搜索框 -->
+  <view class="search-bar">
+    <view class="back-btn" bindtap="goBack">
+      <image src="/assets/icons/back-arrow.png" class="back-arrow"></image>
+    </view>
+    <view class="search-box" bindtap="goSearch">
+      <image src="/assets/icons/search.png" class="search-icon"></image>
+      <text class="search-placeholder">搜索您想查找的商品</text>
+    </view>
+    <image src="/assets/icons/scan-pink.png" class="scan-icon" bindtap="scanCode"></image>
+  </view>
+
+  <!-- 产品页视频区域 -->
+  <view class="product-videos-section" wx:if="{{productVideos.length > 0}}">
+    <view 
+      class="product-video-item" 
+      wx:for="{{productVideos}}" 
+      wx:key="index"
+    >
+      <view class="video-title-bar">
+        <view class="title-line"></view>
+        <text class="video-title">{{item.title || '视频'}}</text>
+        <view class="title-line"></view>
+      </view>
+      <view class="video-cover-wrapper">
+        <!-- 封面（未播放时显示） -->
+        <block wx:if="{{playingVideoIndex !== index}}">
+          <image 
+            class="video-cover" 
+            src="{{item.coverUrl || 'https://zhengpan-fireworks-1392575669.cos.ap-shanghai.myqcloud.com/miniprogram/assets/images/video-default-cover.png'}}" 
+            mode="aspectFill"
+            bindtap="playProductVideo"
+            data-index="{{index}}"
+          ></image>
+          <view class="play-btn" bindtap="playProductVideo" data-index="{{index}}">
+            <image src="/assets/icons/play-big.png" class="play-icon"></image>
+          </view>
+        </block>
+        <!-- 内嵌视频播放器 -->
+        <video 
+          wx:if="{{playingVideoIndex === index}}"
+          id="listVideo{{index}}"
+          class="inline-list-video"
+          src="{{item.videoUrl}}"
+          poster="{{item.coverUrl}}"
+          autoplay="{{true}}"
+          controls="{{true}}"
+          show-fullscreen-btn="{{true}}"
+          show-play-btn="{{true}}"
+          show-center-play-btn="{{true}}"
+          enable-progress-gesture="{{true}}"
+          enable-auto-rotation="{{true}}"
+          bindended="onListVideoEnded"
+          binderror="onListVideoError"
+          data-index="{{index}}"
+        ></video>
+      </view>
+    </view>
+  </view>
+
+  <!-- 筛选栏 -->
+  <view class="filter-bar">
+    <view class="filter-item {{sortType === 'category' ? 'active' : ''}}" bindtap="toggleCategory">
+      <text>分类</text>
+      <view class="sort-arrows">
+        <view class="arrow-up"></view>
+        <view class="arrow-down"></view>
+      </view>
+    </view>
+    <view class="filter-item {{sortType === 'views' ? 'active' : ''}}" bindtap="toggleViews">
+      <text>浏览量</text>
+      <view class="sort-arrows">
+        <view class="arrow-up {{viewsOrder === 'asc' ? 'active-arrow' : ''}}"></view>
+        <view class="arrow-down {{viewsOrder === 'desc' ? 'active-arrow' : ''}}"></view>
+      </view>
+    </view>
+    <view class="filter-item {{sortType === 'new' ? 'active' : ''}}" bindtap="toggleNew">
+      <text>新品</text>
+      <view class="sort-arrows">
+        <view class="arrow-up {{newOrder === 'asc' ? 'active-arrow' : ''}}"></view>
+        <view class="arrow-down {{newOrder === 'desc' ? 'active-arrow' : ''}}"></view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 分类选择弹窗 -->
+  <view class="category-popup {{showCategoryPopup ? 'show' : ''}}" catchtap="hideCategoryPopup">
+    <view class="category-content" catchtap="stopPropagation">
+      <view class="category-header">
+        <text class="category-cancel" bindtap="hideCategoryPopup">取消</text>
+        <text class="category-title">请选择分类</text>
+        <text class="category-confirm" bindtap="confirmCategory">确定</text>
+      </view>
+      <view class="category-body">
+        <!-- 左侧父类列表 -->
+        <view class="category-parent-list">
+          <view 
+            class="parent-item {{selectedParentIndex === index ? 'active' : ''}}" 
+            wx:for="{{categoryList}}" 
+            wx:key="id"
+            wx:for-index="index"
+            bindtap="selectParent" 
+            data-index="{{index}}">
+            <text>{{item.name}}</text>
+            <view class="active-indicator" wx:if="{{selectedParentIndex === index}}"></view>
+          </view>
+        </view>
+        
+        <!-- 右侧子类列表 -->
+        <view class="category-children-list">
+          <!-- 全部选项 -->
+          <view 
+            class="child-item {{tempCategory === '' ? 'active' : ''}}" 
+            bindtap="selectTempCategory" 
+            data-category="">
+            <text>全部</text>
+            <text class="check-mark" wx:if="{{tempCategory === ''}}">✓</text>
+          </view>
+          
+          <!-- 选中父类本身 -->
+          <view 
+            class="child-item {{tempCategory === categoryList[selectedParentIndex].id ? 'active' : ''}}" 
+            bindtap="selectParentCategory" 
+            data-category="{{categoryList[selectedParentIndex].id}}">
+            <text>{{categoryList[selectedParentIndex].name}}</text>
+            <text class="check-mark" wx:if="{{tempCategory === categoryList[selectedParentIndex].id}}">✓</text>
+          </view>
+          
+          <!-- 子分类列表 -->
+          <view 
+            class="child-item {{tempCategory === item.id ? 'active' : ''}}" 
+            wx:for="{{currentChildren}}" 
+            wx:key="id"
+            bindtap="selectTempCategory" 
+            data-category="{{item.id}}">
+            <text>{{item.name}}</text>
+            <text class="check-mark" wx:if="{{tempCategory === item.id}}">✓</text>
+          </view>
+          
+          <!-- 无子分类提示 -->
+          <view class="no-children" wx:if="{{currentChildren.length === 0}}">
+            <text>暂无子分类</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 产品列表 -->
+  <view class="product-grid">
+    <view class="product-card" wx:for="{{productList}}" wx:key="id">
+      <image src="{{item.image}}" mode="aspectFill" class="product-img" bindtap="goVideo" data-id="{{item.id}}"></image>
+      <view class="product-info">
+        <view class="product-name-wrap">
+          <view class="name-bar"></view>
+          <text class="product-name">{{item.name}}</text>
+        </view>
+        <view class="product-specs">
+          <view class="spec-item">
+            <view class="spec-dot"></view>
+            <text>含量：{{item.content}}</text>
+          </view>
+          <view class="spec-item">
+            <view class="spec-dot"></view>
+            <text>体积：{{item.volume}}</text>
+          </view>
+        </view>
+        <view class="product-actions">
+          <view class="action-btn detail-btn" catchtap="goDetail" data-id="{{item.id}}">
+            <text>详情</text>
+          </view>
+          <view class="action-btn video-btn" catchtap="goVideo" data-id="{{item.id}}">
+            <text>视频</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 加载更多 -->
+  <view class="loading-more" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+  <view class="no-more" wx:if="{{!hasMore && productList.length > 0}}">
+    <text>没有更多了</text>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{!loading && productList.length === 0}}">
+    <image src="/assets/images/empty.png" class="empty-img"></image>
+    <text>暂无相关产品</text>
+  </view>
+
+  <!-- 底图横幅 -->
+  <page-banner pageKey="product" position="bottom"></page-banner>
+</view>

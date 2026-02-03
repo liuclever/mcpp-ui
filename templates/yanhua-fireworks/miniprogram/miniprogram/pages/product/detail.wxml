@@ -1,0 +1,236 @@
+<view class="container">
+  <!-- 顶部导航栏 -->
+  <nav-bar title="产品详情" showClose="{{true}}" showMore="{{true}}"></nav-bar>
+
+  <!-- 品牌栏 -->
+  <view class="brand-bar">
+    <view class="brand-left" bindtap="goBack">
+      <image src="/assets/icons/back-arrow.png" class="arrow-icon"></image>
+    </view>
+    <view class="brand-center">
+      <image src="/assets/images/brand-logo.png" class="brand-logo"></image>
+    </view>
+    <view class="brand-right" bindtap="scanCode">
+      <image src="/assets/icons/scan-pink.png" class="scan-icon" mode="aspectFit"></image>
+    </view>
+  </view>
+
+  <!-- 产品主图/视频区域 -->
+  <view class="product-main">
+    <!-- 产品封面（未播放视频时显示） -->
+    <block wx:if="{{!isVideoPlaying && !isTutorialPlaying}}">
+      <image src="{{product.image}}" mode="aspectFill" class="product-img"></image>
+      <view class="play-btn-large" bindtap="playVideo">
+        <image src="/assets/icons/play-big.png" class="play-icon-large"></image>
+      </view>
+    </block>
+    <!-- 内嵌视频播放器 -->
+    <video 
+      wx:if="{{isVideoPlaying}}"
+      id="detailVideo"
+      class="inline-detail-video"
+      src="{{product.videoUrl}}"
+      poster="{{product.image}}"
+      autoplay="{{true}}"
+      controls="{{true}}"
+      show-fullscreen-btn="{{true}}"
+      show-play-btn="{{true}}"
+      show-center-play-btn="{{true}}"
+      enable-progress-gesture="{{true}}"
+      enable-auto-rotation="{{true}}"
+      bindended="onVideoEnded"
+      binderror="onVideoError"
+    ></video>
+    <!-- 内嵌教程播放器 -->
+    <video 
+      wx:if="{{isTutorialPlaying}}"
+      id="tutorialVideo"
+      class="inline-detail-video"
+      src="{{product.tutorialUrl}}"
+      poster="{{product.image}}"
+      autoplay="{{true}}"
+      controls="{{true}}"
+      show-fullscreen-btn="{{true}}"
+      show-play-btn="{{true}}"
+      show-center-play-btn="{{true}}"
+      enable-progress-gesture="{{true}}"
+      enable-auto-rotation="{{true}}"
+      bindended="onTutorialEnded"
+      binderror="onTutorialError"
+    ></video>
+  </view>
+
+  <!-- 视频/教程切换 -->
+  <view class="video-tabs">
+    <view class="tab-btn video-btn {{currentTab === 'video' ? 'active' : 'inactive'}}" bindtap="switchTab" data-tab="video">
+      <image src="/assets/icons/play-white.png" class="tab-icon"></image>
+      <text>视频</text>
+    </view>
+    <view class="tab-btn tutorial-btn {{currentTab === 'tutorial' ? 'active' : 'inactive'}}" bindtap="switchTab" data-tab="tutorial">
+      <image src="/assets/icons/play-white.png" class="tab-icon"></image>
+      <text>教程</text>
+    </view>
+  </view>
+
+  <!-- 查找网点入口 -->
+  <view class="nearby-entry" bindtap="goNearby">
+    <image src="/assets/icons/location-pink.png" class="location-icon"></image>
+    <text>查找离您最近的正规点</text>
+  </view>
+
+  <!-- 产品信息 -->
+  <view class="product-info">
+    <view class="info-header">
+      <view class="name-wrapper">
+        <view class="name-bar"></view>
+        <view class="name-content">
+          <text class="product-name">{{product.name}}</text>
+          <text class="product-name-en">{{product.nameEn}}</text>
+        </view>
+      </view>
+      <image src="/assets/icons/qrcode-pink.png" class="qrcode-btn" bindtap="showQrcode"></image>
+    </view>
+    
+    <view class="info-list">
+      <view class="info-item">
+        <view class="info-dot"></view>
+        <text class="info-label">类别：</text>
+        <text class="info-value">{{product.category}}</text>
+      </view>
+      <view class="info-item">
+        <view class="info-dot"></view>
+        <text class="info-label">编号：</text>
+        <text class="info-value">{{product.code}}</text>
+      </view>
+      <view class="info-item">
+        <view class="info-dot"></view>
+        <text class="info-label">含量：</text>
+        <text class="info-value">{{product.content}}</text>
+      </view>
+      <view class="info-item">
+        <view class="info-dot"></view>
+        <text class="info-label">体积：</text>
+        <text class="info-value">{{product.volume}}</text>
+      </view>
+    </view>
+
+    <view class="stats">
+      <view class="stat-item">
+        <image src="/assets/icons/scan-pink.png" class="stat-icon"></image>
+        <text>{{product.views}}</text>
+      </view>
+      <view class="stat-item">
+        <image src="/assets/icons/heart-pink.png" class="stat-icon"></image>
+        <text>{{product.likes}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部提示 -->
+  <view class="footer-notice">
+    <text>该系统全部产品均为企业产品展示，仅供二维码扫码查看产品真实效果；如有人转发该页面进行在线推荐或者销售行为均属违法行为，烟花必须前往正规网点购买。请第一时间联系技术支持电话，坚决打击违法犯罪！烟花必须前往正规网点购买！</text>
+  </view>
+
+  <!-- 底部品牌 -->
+  <view class="footer-brand">
+    <image src="/assets/images/brand-badge.png" class="footer-badge" mode="widthFix"></image>
+  </view>
+
+  <!-- 底部操作栏 -->
+  <view class="action-bar safe-bottom">
+    <view class="action-item" bindtap="goHome">
+      <image src="/assets/icons/home-white.png" class="action-icon"></image>
+    </view>
+    <view class="action-item" bindtap="shareProduct">
+      <image src="/assets/icons/share-white.png" class="action-icon"></image>
+    </view>
+    <view class="action-item" bindtap="showComment">
+      <image src="/assets/icons/comment-white.png" class="action-icon"></image>
+    </view>
+  </view>
+</view>
+
+<!-- 分享弹窗 -->
+<view class="share-modal" wx:if="{{showShareModal}}" bindtap="hideShareModal">
+  <view class="share-card" catchtap="">
+    <view class="share-header">
+      <view class="share-brand-info">
+        <image src="/assets/images/brand-logo-small.png" class="share-logo"></image>
+      </view>
+      <image src="/assets/icons/close-circle.png" class="share-close-btn" bindtap="hideShareModal"></image>
+    </view>
+    <image src="{{product.image}}" mode="aspectFill" class="share-img"></image>
+    <view class="share-info">
+      <view class="share-left">
+        <text class="share-name">{{product.name}}</text>
+        <view class="share-specs">
+          <text>类别：{{product.category}}</text>
+          <text>编号：{{product.code}}</text>
+          <text>含量：{{product.content}}</text>
+          <text>体积：{{product.volume}}</text>
+        </view>
+      </view>
+      <view class="share-right">
+        <image src="{{product.qrcode}}" class="share-qrcode"></image>
+        <text class="qrcode-tip">扫一扫看效果</text>
+        <view class="video-tag">内有视频</view>
+      </view>
+    </view>
+    <!-- 保存按钮 -->
+    <view class="share-actions">
+      <button class="save-btn" bindtap="saveShareImage">保存图片</button>
+    </view>
+  </view>
+</view>
+
+<!-- 评论弹窗 -->
+<view class="comment-modal" wx:if="{{showCommentModal}}" bindtap="hideCommentModal">
+  <view class="comment-container" catchtap="">
+    <view class="comment-header">
+      <text class="comment-title">评论</text>
+      <image src="/assets/icons/close.png" class="comment-close-btn" bindtap="hideCommentModal"></image>
+    </view>
+    <view class="comment-content">
+      <comment-list
+        videoId="{{productId}}"
+        comments="{{comments}}"
+        hasMore="{{hasMoreComments}}"
+        loading="{{loadingComments}}"
+        showEmpty="{{showEmptyComments}}"
+        bind:reply="onReplyComment"
+        bind:likeComment="onLikeComment"
+        bind:loadMore="onLoadMoreComments"
+      />
+    </view>
+    <!-- 发表评论按钮 -->
+    <view class="comment-footer">
+      <button class="comment-input-btn" bindtap="showCommentInput">发表评论...</button>
+    </view>
+  </view>
+</view>
+
+<!-- 用于生成分享图片的canvas -->
+<canvas type="2d" id="shareCanvas" class="share-canvas"></canvas>
+
+<!-- 发表评论输入框 -->
+<comment-input
+  id="commentInput"
+  videoId="{{productId}}"
+  show="{{showCommentInput}}"
+  autoFocus="{{true}}"
+  bind:submit="onCommentSubmit"
+  bind:cancel="onCommentCancel"
+/>
+
+<!-- 回复评论输入框 -->
+<comment-input
+  id="replyInput"
+  videoId="{{productId}}"
+  parentId="{{replyComment.id}}"
+  replyToId="{{replyComment.userId}}"
+  replyToName="{{replyComment.userName}}"
+  show="{{showReplyInput}}"
+  autoFocus="{{true}}"
+  bind:submit="onReplySubmit"
+  bind:cancel="onReplyCancel"
+/>

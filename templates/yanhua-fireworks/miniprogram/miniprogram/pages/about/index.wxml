@@ -1,0 +1,81 @@
+<view class="container">
+  <!-- 顶部Banner - 使用后台配置的顶图 -->
+  <view class="banner" wx:if="{{topBannerUrl}}">
+    <image src="{{topBannerUrl}}" mode="widthFix" class="banner-img"></image>
+  </view>
+  <view class="banner" wx:else>
+    <image src="https://zhengpan-fireworks-1392575669.cos.ap-shanghai.myqcloud.com/miniprogram/assets/images/about-banner.png" mode="widthFix" class="banner-img"></image>
+  </view>
+
+  <!-- 品牌标识 -->
+  <view class="brand-badge">
+    <image src="/assets/images/about-logo.png" class="badge-logo" mode="widthFix"></image>
+  </view>
+
+  <!-- 公司信息 -->
+  <view class="company-info">
+    <view class="info-content">
+      <!-- 左侧logo -->
+      <view class="info-left">
+        <image src="/assets/images/brand-logo.png" class="company-logo" mode="widthFix"></image>
+      </view>
+      <!-- 右侧信息 -->
+      <view class="info-right">
+        <text class="company-name">{{companyInfo.name}}</text>
+        <view class="info-list">
+          <view class="info-item">
+            <text class="info-label">地址：</text>
+            <text class="info-value">{{companyInfo.address}}</text>
+          </view>
+          <view class="info-item">
+            <text class="info-label">电话：</text>
+            <text class="info-value">{{companyInfo.phone1}}</text>
+          </view>
+          <view class="info-item" wx:if="{{contactInfo && contactInfo.phone2}}">
+            <text class="info-label">电话：</text>
+            <text class="info-value">{{contactInfo.phone2}}</text>
+          </view>
+          <view class="info-item" wx:if="{{contactInfo && contactInfo.phone3}}">
+            <text class="info-label">电话：</text>
+            <text class="info-value">{{contactInfo.phone3}}</text>
+          </view>
+          <view class="info-item" wx:if="{{contactInfo && contactInfo.fax}}">
+            <text class="info-label">传真：</text>
+            <text class="info-value">{{contactInfo.fax}}</text>
+          </view>
+          <view class="info-item" wx:if="{{contactInfo && contactInfo.email}}">
+            <text class="info-label">邮箱：</text>
+            <text class="info-value">{{contactInfo.email}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 分割线 -->
+    <view class="divider-section">
+      <image src="/assets/images/about-divider.png" class="divider-img" mode="widthFix"></image>
+    </view>
+
+    <!-- 快捷操作 -->
+    <view class="quick-actions">
+      <view class="action-btn nav-btn" bindtap="openNavigation">
+        <image src="/assets/icons/nav-pink.png" class="action-icon"></image>
+        <text>一键导航</text>
+      </view>
+      <view class="action-btn call-btn" bindtap="makeCall">
+        <image src="/assets/icons/phone-pink.png" class="action-icon"></image>
+        <text>一键拨号</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部提示 -->
+  <view class="footer-notice">
+    <text>该系统全部产品均为企业产品展示，仅供二维码扫码查看产品真实效果；如有人转发该页面进行在线推荐或者销售行为均属违法行为，烟花必须前往正规网点购买。请第一时间联系技术支持电话，坚决打击违法犯罪！烟花必须前往正规网点购买！</text>
+  </view>
+
+  <!-- 底图横幅 - 使用后台配置的底图 -->
+  <view class="banner bottom-banner" wx:if="{{bottomBannerUrl}}">
+    <image src="{{bottomBannerUrl}}" mode="widthFix" class="banner-img"></image>
+  </view>
+</view>

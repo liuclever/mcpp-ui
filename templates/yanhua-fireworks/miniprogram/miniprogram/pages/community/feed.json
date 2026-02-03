@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "视频",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "interaction-bar": "/components/interaction-bar/interaction-bar",
+    "comment-list": "/components/comment-list/comment-list",
+    "comment-input": "/components/comment-input/comment-input"
+  }
+}

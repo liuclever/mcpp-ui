@@ -1,0 +1,59 @@
+<view class="container">
+  <view class="content">
+    <view class="title">绑定手机号</view>
+    <view class="subtitle">为了您的账号安全，请绑定手机号</view>
+
+    <!-- 手机号输入 -->
+    <view class="form-item">
+      <input 
+        type="number" 
+        placeholder="请输入手机号" 
+        value="{{phone}}"
+        bindinput="onPhoneInput"
+        maxlength="11"
+        class="input {{phoneError ? 'error' : ''}}"
+      />
+    </view>
+    <view class="error-text" wx:if="{{phoneError}}">{{phoneError}}</view>
+
+    <!-- 验证码输入 -->
+    <view class="form-item sms-item">
+      <input 
+        type="number" 
+        placeholder="请输入验证码" 
+        value="{{smsCode}}"
+        bindinput="onSmsCodeInput"
+        maxlength="6"
+        class="input"
+      />
+      <button 
+        class="sms-btn {{countdown > 0 ? 'disabled' : ''}}" 
+        bindtap="sendSmsCode"
+        disabled="{{countdown > 0}}"
+      >
+        {{countdown > 0 ? countdown + 's' : '获取验证码'}}
+      </button>
+    </view>
+
+    <!-- 密码输入 -->
+    <view class="form-item">
+      <input 
+        type="password" 
+        placeholder="设置密码(至少8位)" 
+        value="{{password}}"
+        bindinput="onPasswordInput"
+        class="input"
+      />
+    </view>
+
+    <!-- 绑定按钮 -->
+    <button class="bind-btn" bindtap="bindPhone" disabled="{{isBinding}}">
+      {{isBinding ? '绑定中...' : '立即绑定'}}
+    </button>
+
+    <!-- 跳过按钮 -->
+    <view class="skip-btn" bindtap="skipBinding">
+      暂时跳过
+    </view>
+  </view>
+</view>

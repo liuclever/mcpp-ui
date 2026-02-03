@@ -1,0 +1,104 @@
+<!--pages/auth/bind-wechat.wxml-->
+<view class="bind-wechat-container">
+  <!-- 加载中 -->
+  <view class="loading-state" wx:if="{{isLoading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <!-- 已绑定状态 -->
+  <view class="bound-state" wx:elif="{{isBound}}">
+    <view class="title">微信已绑定</view>
+    <view class="subtitle">您已成功绑定微信账号</view>
+
+    <!-- 成功图标 -->
+    <view class="success-icon-wrapper">
+      <view class="success-icon">✓</view>
+    </view>
+
+    <!-- 绑定信息 -->
+    <view class="bound-info">
+      <view class="info-item">
+        <text class="info-label">绑定状态</text>
+        <text class="info-value success">已绑定</text>
+      </view>
+      <view class="info-item">
+        <text class="info-label">快速登录</text>
+        <text class="info-value">已开启</text>
+      </view>
+    </view>
+
+    <!-- 解绑按钮 -->
+    <button class="unbind-btn" bindtap="unbindWechat">
+      <text>解除绑定</text>
+    </button>
+
+    <!-- 提示信息 -->
+    <view class="tips">
+      <view class="tip-text">解绑后将无法使用微信快速登录</view>
+    </view>
+  </view>
+
+  <!-- 未绑定状态 -->
+  <view class="unbound-state" wx:else>
+    <view class="title">绑定微信</view>
+    <view class="subtitle">绑定后可使用微信快速登录</view>
+
+    <!-- 微信图标 -->
+    <view class="wechat-icon-wrapper">
+      <image class="wechat-icon" src="/images/wechat-icon.png" mode="aspectFit"></image>
+    </view>
+
+    <!-- 说明文字 -->
+    <view class="description">
+      <view class="desc-item">• 点击下方按钮授权微信登录</view>
+      <view class="desc-item">• 绑定后可使用微信一键登录</view>
+      <view class="desc-item">• 如微信已被绑定，可选择合并账号</view>
+    </view>
+
+    <!-- 绑定按钮 -->
+    <button 
+      class="bind-btn {{isBinding ? 'disabled' : ''}}"
+      bindtap="bindWechat"
+      disabled="{{isBinding}}"
+    >
+      <image class="btn-icon" src="/images/wechat-white.png" mode="aspectFit"></image>
+      <text>{{isBinding ? '绑定中...' : '授权并绑定微信'}}</text>
+    </button>
+
+    <!-- 提示信息 -->
+    <view class="tips">
+      <view class="tip-text">绑定微信不会获取您的个人信息</view>
+      <view class="tip-text">仅用于快速登录验证</view>
+    </view>
+  </view>
+</view>
+
+<!-- 账号合并对话框 -->
+<view class="merge-dialog-mask" wx:if="{{showMergeDialog}}" bindtap="closeMergeDialog">
+  <view class="merge-dialog" catchtap="">
+    <view class="dialog-title">账号合并</view>
+    <view class="dialog-content">
+      <view class="dialog-text">该微信已被其他账号绑定，是否合并账号？</view>
+      <view class="dialog-text warning">合并后，当前账号的数据将迁移到原账号</view>
+      
+      <!-- 密码输入 -->
+      <view class="dialog-input-wrapper">
+        <view class="dialog-label">原账号密码</view>
+        <input 
+          class="dialog-input {{mergePasswordError ? 'error' : ''}}"
+          type="password"
+          placeholder="请输入原账号密码"
+          value="{{mergePassword}}"
+          bindinput="onMergePasswordInput"
+        />
+        <view class="error-text" wx:if="{{mergePasswordError}}">{{mergePasswordError}}</view>
+      </view>
+    </view>
+    
+    <view class="dialog-actions">
+      <button class="dialog-btn cancel" bindtap="closeMergeDialog">取消</button>
+      <button class="dialog-btn confirm" bindtap="confirmMerge">确认合并</button>
+    </view>
+  </view>
+</view>

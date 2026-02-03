@@ -1,0 +1,248 @@
+/* 注册页样式 */
+.container {
+  min-height: 100vh;
+  background: #fff;
+  padding-top: calc(180rpx + env(safe-area-inset-top));
+  padding-bottom: calc(160rpx + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tab栏（Pill） */
+.tab-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 80rpx;
+  padding-bottom: 30rpx;
+}
+
+.tab-pill {
+  background: #fff;
+  width: 640rpx;
+  border-radius: 80rpx;
+  display: flex;
+  padding: 10rpx;
+  box-shadow: 0 6rpx 20rpx rgba(0,0,0,0.08);
+  z-index: 10;
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 28rpx 0;
+  border-radius: 60rpx;
+  font-size: 30rpx;
+  color: #999;
+}
+
+.tab-item.active {
+  background: linear-gradient(135deg, #d03a6a 0%, #e91e63 100%);
+  color: #fff;
+  box-shadow: 0 6rpx 18rpx rgba(208,58,106,0.18);
+}
+
+/* 表单卡片 */
+.form-card {
+  background: #fff;
+  margin: 80rpx 24rpx 20rpx 24rpx;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  box-shadow: 0 20rpx 60rpx rgba(0,0,0,0.12), 0 8rpx 24rpx rgba(0,0,0,0.08);
+  transform: translateZ(0);
+}
+
+.form-title {
+  display: block;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #d03a6a;
+  margin-bottom: 30rpx;
+}
+
+.form-item {
+  display: flex;
+  align-items: center;
+  border-bottom: 2rpx solid #f0f0f0;
+  padding: 20rpx 0;
+  margin-bottom: 16rpx;
+}
+
+.form-item.error {
+  border-bottom-color: #ff4444;
+}
+
+.form-item input {
+  flex: 1;
+  font-size: 28rpx;
+  color: #666;
+  padding-left: 10rpx;
+}
+
+.input-icon {
+  width: 44rpx;
+  height: 44rpx;
+  opacity: 1;
+}
+
+.error-tip {
+  color: #ff4444;
+  font-size: 24rpx;
+  margin-top: -12rpx;
+  margin-bottom: 12rpx;
+  padding-left: 10rpx;
+}
+
+.password-strength {
+  display: flex;
+  align-items: center;
+  margin-top: -8rpx;
+  margin-bottom: 16rpx;
+  padding-left: 10rpx;
+}
+
+.strength-label {
+  font-size: 24rpx;
+  color: #999;
+  margin-right: 12rpx;
+}
+
+.strength-bar {
+  display: flex;
+  gap: 8rpx;
+  margin-right: 12rpx;
+}
+
+.strength-item {
+  width: 60rpx;
+  height: 8rpx;
+  background: #e0e0e0;
+  border-radius: 4rpx;
+}
+
+.strength-item.active.weak {
+  background: #ff4444;
+}
+
+.strength-item.active.medium {
+  background: #f5a623;
+}
+
+.strength-item.active.strong {
+  background: #4caf50;
+}
+
+.strength-text {
+  font-size: 24rpx;
+}
+
+.strength-text.weak {
+  color: #ff4444;
+}
+
+.strength-text.medium {
+  color: #f5a623;
+}
+
+.strength-text.strong {
+  color: #4caf50;
+}
+
+.code-item {
+  gap: 20rpx;
+}
+
+.code-btn {
+  background: linear-gradient(135deg, #f5a623 0%, #f76b1c 100%);
+  color: #fff;
+  padding: 16rpx 32rpx;
+  border-radius: 30rpx;
+  font-size: 24rpx;
+  white-space: nowrap;
+  box-shadow: 0 4rpx 12rpx rgba(245,166,35,0.3);
+}
+
+.code-btn.disabled {
+  background: #ccc;
+  box-shadow: none;
+}
+
+.register-btn-wrap {
+  padding: 0 24rpx;
+  margin-top: 40rpx;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.register-btn {
+  background: linear-gradient(135deg, #d03a6a 0%, #e91e63 100%);
+  color: #fff;
+  text-align: center;
+  padding: 20rpx 80rpx;
+  border-radius: 40rpx;
+  font-size: 30rpx;
+  box-shadow: 0 6rpx 18rpx rgba(208,58,106,0.3);
+}
+
+.register-btn.disabled {
+  background: #ccc;
+  box-shadow: none;
+}
+
+/* 分割线 */
+.divider-section {
+  padding: 30rpx 30rpx;
+  text-align: center;
+}
+
+.divider-text {
+  color: #e22665;
+  font-size: 22rpx;
+}
+
+.social-row {
+  display: flex;
+  justify-content: center;
+  gap: 100rpx;
+  margin-top: 60rpx;
+}
+
+.social-button {
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-icon-img {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+
+/* 底部提示 */
+.footer-notice {
+  padding: 20rpx 30rpx;
+  background: #fff;
+  margin: 20rpx 30rpx;
+  border-radius: 12rpx;
+}
+
+.footer-notice text {
+  font-size: 20rpx;
+  color: #d03a6a;
+  line-height: 1.5;
+}
+
+/* 底部品牌 */
+.footer-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  padding: 30rpx 0 20rpx 0;
+}
+
+.footer-brand-img {
+  width: 500rpx;
+}

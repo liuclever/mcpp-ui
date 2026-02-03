@@ -1,0 +1,84 @@
+.nav-bar {
+  width: 100%;
+  background: #1a1a1a;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+}
+
+.nav-content {
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  background: #1a1a1a;
+  padding: 0 20rpx;
+}
+
+.nav-left {
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.close-icon {
+  font-size: 48rpx;
+  color: #fff;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.back-icon {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.nav-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-title {
+  font-size: 34rpx;
+  font-weight: 500;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.brand-logo {
+  height: 50rpx;
+  max-width: 400rpx;
+}
+
+.nav-right {
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.more-icon {
+  font-size: 48rpx;
+  color: #fff;
+  font-weight: bold;
+  line-height: 1;
+  letter-spacing: 2rpx;
+}
+
+.scan-icon {
+  width: 40rpx;
+  height: 40rpx;
+}

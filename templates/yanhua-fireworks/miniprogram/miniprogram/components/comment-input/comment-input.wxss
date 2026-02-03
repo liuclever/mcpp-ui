@@ -1,0 +1,157 @@
+/* components/comment-input/comment-input.wxss */
+
+.comment-input-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+/* 遮罩层 */
+.comment-input-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+/* 输入区域容器 */
+.comment-input-wrapper {
+  position: relative;
+  z-index: 2;
+  background-color: #ffffff;
+  border-radius: 16rpx 16rpx 0 0;
+  padding: 24rpx;
+  box-shadow: 0 -4rpx 16rpx rgba(0, 0, 0, 0.1);
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* 回复提示 */
+.reply-hint {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16rpx 20rpx;
+  background-color: #f5f5f5;
+  border-radius: 8rpx;
+  margin-bottom: 16rpx;
+}
+
+.reply-text {
+  font-size: 28rpx;
+  color: #666666;
+}
+
+.cancel-reply {
+  font-size: 40rpx;
+  color: #999999;
+  line-height: 1;
+  padding: 0 8rpx;
+}
+
+/* 输入框区域 */
+.input-area {
+  position: relative;
+  background-color: #f8f8f8;
+  border-radius: 8rpx;
+  padding: 20rpx;
+  min-height: 120rpx;
+  margin-bottom: 16rpx;
+}
+
+.comment-textarea {
+  width: 100%;
+  min-height: 80rpx;
+  max-height: 300rpx;
+  font-size: 30rpx;
+  color: #333333;
+  line-height: 1.6;
+  background-color: transparent;
+}
+
+.placeholder {
+  color: #999999;
+}
+
+/* 字数统计 */
+.char-count {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8rpx;
+  font-size: 24rpx;
+  color: #999999;
+}
+
+.char-count .over-limit {
+  color: #ff4444;
+}
+
+/* 操作按钮 */
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16rpx;
+}
+
+.cancel-btn,
+.submit-btn {
+  padding: 16rpx 32rpx;
+  font-size: 28rpx;
+  border-radius: 8rpx;
+  border: none;
+  line-height: 1.4;
+}
+
+.cancel-btn {
+  background-color: #f5f5f5;
+  color: #666666;
+}
+
+.cancel-btn:active {
+  background-color: #e8e8e8;
+}
+
+.submit-btn {
+  background-color: #ff6b9d;
+  color: #ffffff;
+}
+
+.submit-btn:active {
+  background-color: #ff5a8d;
+}
+
+.submit-btn.submitting {
+  background-color: #ffb3cd;
+}
+
+.submit-btn[disabled] {
+  background-color: #ffb3cd;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.cancel-btn[disabled] {
+  background-color: #f5f5f5;
+  color: #cccccc;
+}
+
+/* 适配安全区域 */
+.comment-input-wrapper {
+  padding-bottom: calc(24rpx + env(safe-area-inset-bottom));
+}

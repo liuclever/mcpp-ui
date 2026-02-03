@@ -1,0 +1,88 @@
+<!--pages/community/detail.wxml-->
+<view class="detail-container">
+  <!-- 顶部导航栏 -->
+  <view class="nav-bar">
+    <view class="back-btn" bindtap="goBack">
+      <text class="back-icon">←</text>
+      <text class="back-text">返回</text>
+    </view>
+    <text class="nav-title">视频详情</text>
+  </view>
+
+  <!-- 视频播放区域 -->
+  <view class="video-section" wx:if="{{video}}">
+    <video
+      class="video-player"
+      src="{{video.videoUrl}}"
+      poster="{{video.coverUrl}}"
+      autoplay="{{true}}"
+      controls="{{true}}"
+      show-center-play-btn="{{true}}"
+      object-fit="contain"
+    />
+    
+    <!-- 视频信息 -->
+    <view class="video-info">
+      <view class="author-info">
+        <image class="avatar" src="{{video.userAvatar || '/assets/images/default-avatar.png'}}" mode="aspectFill" />
+        <view class="author-details">
+          <text class="nickname">{{video.userName || '匿名用户'}}</text>
+          <text class="time">{{video.createTime}}</text>
+        </view>
+      </view>
+      
+      <view class="video-desc">
+        <text class="title">{{video.title}}</text>
+        <text class="description" wx:if="{{video.description}}">{{video.description}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 相关产品 -->
+  <view class="product-section" wx:if="{{video && video.productNames && video.productNames.length > 0}}">
+    <view class="section-header">
+      <text class="section-title">相关产品</text>
+    </view>
+    <view class="product-tags">
+      <text class="product-tag" wx:for="{{video.productNames}}" wx:key="index">
+        {{item}}
+      </text>
+    </view>
+  </view>
+
+  <!-- 评论区 -->
+  <view class="comment-section" id="comment-section">
+    <view class="section-header">
+      <text class="section-title">评论 {{video ? video.comments : 0}}</text>
+      <view class="comment-btn" bindtap="showCommentInput">
+        <image class="comment-icon" src="/assets/icons/comment.png" mode="aspectFit" />
+        <text class="comment-text">发表评论</text>
+      </view>
+    </view>
+
+    <!-- 评论列表 -->
+    <comment-list
+      video-id="{{videoId}}"
+      comments="{{comments}}"
+      has-more="{{hasMore}}"
+      loading="{{loading}}"
+      show-empty="{{!loading && comments.length === 0}}"
+      bind:likeComment="onLikeComment"
+      bind:replyComment="onReplyComment"
+      bind:loadMore="onLoadMoreComments"
+    />
+  </view>
+
+  <!-- 评论输入组件 -->
+  <comment-input
+    id="comment-input"
+    video-id="{{videoId}}"
+    parent-id="{{replyComment ? (replyComment.parentId || replyComment.id) : null}}"
+    reply-to-id="{{replyComment ? replyComment.userId : null}}"
+    reply-to-name="{{replyComment ? replyComment.userName : ''}}"
+    show="{{showCommentInput}}"
+    auto-focus="{{true}}"
+    bind:submit="onSubmitComment"
+    bind:cancel="onCancelComment"
+  />
+</view>

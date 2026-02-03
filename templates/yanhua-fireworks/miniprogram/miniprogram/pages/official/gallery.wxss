@@ -1,0 +1,62 @@
+/* 图片列表页样式 */
+.container {
+  min-height: 100vh;
+  background: #fce4ec;
+  padding: 20rpx;
+}
+
+/* 图片网格 */
+.gallery-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.gallery-item {
+  width: calc(50% - 8rpx);
+  margin-bottom: 16rpx;
+  border-radius: 8rpx;
+  overflow: hidden;
+  background: transparent;
+}
+
+.gallery-image {
+  width: 100%;
+  height: 300rpx;
+  display: block;
+}
+
+.image-info {
+  padding: 16rpx;
+  background: transparent;
+}
+
+.title {
+  font-size: 26rpx;
+  color: #333;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 加载状态 */
+.loading, .empty {
+  text-align: center;
+  padding: 40rpx 0;
+  color: #999;
+  font-size: 28rpx;
+}
+
+.no-more {
+  text-align: center;
+  padding: 40rpx 0;
+  color: #d03a6a;
+  font-size: 26rpx;
+}
+
+.empty {
+  padding-top: 200rpx;
+}

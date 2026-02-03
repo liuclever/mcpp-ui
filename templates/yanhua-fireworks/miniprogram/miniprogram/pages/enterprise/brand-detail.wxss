@@ -1,0 +1,119 @@
+/* 品牌故事详情页样式 */
+
+.detail-page {
+  min-height: 100vh;
+  background: #fce4ec;
+}
+
+/* 加载状态 */
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #999;
+}
+
+/* 空状态 */
+.empty-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999;
+  margin-bottom: 30rpx;
+}
+
+.empty-button {
+  padding: 20rpx 40rpx;
+  background: #FFD700;
+  color: #333;
+  font-size: 28rpx;
+  border-radius: 8rpx;
+}
+
+/* 内容详情 */
+.detail-content {
+  background: #fff;
+  min-height: 100vh;
+  padding-bottom: 100rpx;
+}
+
+/* 详情头部 */
+.detail-header {
+  padding: 40rpx 30rpx 30rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.detail-title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.5;
+  margin-bottom: 20rpx;
+}
+
+.detail-meta {
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+  color: #999;
+}
+
+.detail-time {
+  display: flex;
+  align-items: center;
+}
+
+/* 详情内容 */
+.detail-body {
+  padding: 30rpx;
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.8;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+/* 富文本样式 */
+.detail-body rich-text {
+  width: 100%;
+  display: block;
+}
+
+/* 返回按钮 */
+.back-button {
+  position: fixed;
+  bottom: 40rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  padding: 20rpx 40rpx;
+  background: #FFD700;
+  color: #333;
+  font-size: 28rpx;
+  border-radius: 50rpx;
+  box-shadow: 0 4rpx 12rpx rgba(255, 215, 0, 0.3);
+  z-index: 100;
+}
+
+.back-icon {
+  font-size: 32rpx;
+  margin-right: 10rpx;
+  font-weight: bold;
+}
+
+.back-text {
+  font-weight: 500;
+}

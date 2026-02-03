@@ -1,0 +1,125 @@
+<view class="container">
+  <!-- 顶部导航栏 -->
+  <nav-bar title="登录" showBack="{{true}}"></nav-bar>
+
+  <!-- Tab 切换（Pill）-->
+  <view class="tab-wrap">
+    <view class="tab-pill">
+      <view class="tab-item {{currentTab === 'login' ? 'active' : ''}}" bindtap="switchTab" data-tab="login">登录</view>
+      <view class="tab-item {{currentTab === 'register' ? 'active' : ''}}" bindtap="switchTab" data-tab="register">注册</view>
+    </view>
+  </view>
+
+  <!-- 登录表单 卡片 -->
+  <view class="form-card" wx:if="{{loginConfig.phoneEnabled}}">
+    <text class="form-title">登陆</text>
+
+    <view class="form-item">
+      <input type="number" placeholder="在这里输入您的手机号" placeholder-style="color:#e6afc0;" value="{{phone}}" bindinput="onPhoneInput" />
+      <image src="/assets/icons/phone-pink.png" class="input-icon"></image>
+    </view>
+    <view class="error-tip" wx:if="{{phoneError}}">{{phoneError}}</view>
+
+    <view class="form-item">
+      <input type="password" placeholder="在这里输入您的密码" placeholder-style="color:#e6afc0;" value="{{password}}" bindinput="onPasswordInput" />
+      <image src="/assets/icons/lock-pink.png" class="input-icon"></image>
+    </view>
+    <view class="error-tip" wx:if="{{passwordError}}">{{passwordError}}</view>
+    
+    <!-- 密码强度指示器 -->
+    <view class="password-strength" wx:if="{{showPasswordStrength}}">
+      <text class="strength-label">密码强度：</text>
+      <text class="strength-value strength-{{passwordStrength}}">
+        {{passwordStrength === 'weak' ? '弱' : passwordStrength === 'medium' ? '中' : '强'}}
+      </text>
+    </view>
+  </view>
+
+  <!-- 忘记密码和登录按钮（在卡片外） -->
+  <view class="form-footer" wx:if="{{loginConfig.phoneEnabled}}">
+    <text class="forgot-link" bindtap="forgotPassword">忘记密码?</text>
+    <view class="login-btn" bindtap="doLogin">登录</view>
+  </view>
+
+  <!-- 分割线 -->
+  <view class="divider-section" wx:if="{{loginConfig.wechatEnabled || loginConfig.phoneEnabled}}">
+    <text class="divider-text" wx:if="{{loginConfig.phoneEnabled}}">——— 其他登录方式 ———</text>
+    <view class="social-row">
+      <view class="social-button" bindtap="wechatLogin" wx:if="{{loginConfig.wechatEnabled}}">
+        <image src="/assets/icons/wechat-circle.png" class="social-icon-img"></image>
+      </view>
+      <view class="social-button" bindtap="phoneLogin">
+        <image src="/assets/icons/scan-circle.png" class="social-icon-img"></image>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部提示 -->
+  <view class="footer-notice">
+    <text>该系统全部产品均为企业产品展示，仅供二维码扫码查看产品真实效果；如有人转发该页面进行在线推荐或者销售行为均属违法行为，烟花必须前往正规网点购买。请第一时间联系技术支持电话，坚决打击违法犯罪！烟花必须前往正规网点购买！</text>
+  </view>
+
+  <!-- 底部品牌 -->
+  <view class="footer-brand">
+    <image src="/assets/images/footer-brand-logo.png" class="footer-brand-img" mode="widthFix"></image>
+  </view>
+
+  <!-- 微信授权弹窗 - 获取头像和昵称 -->
+  <view class="auth-modal" wx:if="{{showAuthModal}}">
+    <view class="auth-modal-mask" bindtap="closeAuthModal"></view>
+    <view class="auth-modal-content">
+      <view class="auth-modal-title">完善个人信息</view>
+      <view class="auth-modal-desc">请授权获取您的微信头像和昵称</view>
+      
+      <!-- 头像选择 -->
+      <view class="auth-avatar-section">
+        <button class="auth-avatar-btn" open-type="chooseAvatar" bindchooseavatar="onAuthChooseAvatar">
+          <image class="auth-avatar-img" src="{{authAvatar || '/assets/icons/default-avatar.png'}}" mode="aspectFill"></image>
+          <view class="auth-avatar-tip">点击获取头像</view>
+        </button>
+      </view>
+      
+      <!-- 昵称输入 -->
+      <view class="auth-nickname-section">
+        <input 
+          class="auth-nickname-input" 
+          type="nickname" 
+          placeholder="点击获取微信昵称" 
+          value="{{authNickname}}"
+          bindinput="onAuthNicknameInput"
+          bindblur="onAuthNicknameBlur"
+        />
+      </view>
+      
+      <!-- 按钮 -->
+      <view class="auth-modal-buttons">
+        <button class="auth-btn-cancel" bindtap="closeAuthModal">取消</button>
+        <button class="auth-btn-confirm" bindtap="confirmAuth">确认登录</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部导航栏 -->
+  <view class="custom-tabbar">
+    <view class="tabbar-item" bindtap="navigateToProduct">
+      <image src="/assets/icons/product.png" class="tabbar-icon"></image>
+      <text class="tabbar-text">产品</text>
+    </view>
+    <view class="tabbar-item" bindtap="navigateToStore">
+      <image src="/assets/icons/store.png" class="tabbar-icon"></image>
+      <text class="tabbar-text">专卖连锁</text>
+    </view>
+    <view class="tabbar-item" bindtap="navigateToOfficial">
+      <image src="/assets/icons/official.png" class="tabbar-icon"></image>
+      <text class="tabbar-text">官网</text>
+    </view>
+    <view class="tabbar-item" bindtap="navigateToAbout">
+      <image src="/assets/icons/about.png" class="tabbar-icon"></image>
+      <text class="tabbar-text">关于</text>
+    </view>
+    <view class="tabbar-item tabbar-active" bindtap="navigateToMine">
+      <image src="/assets/icons/mine-active.png" class="tabbar-icon-active"></image>
+      <text class="tabbar-text-active">我的</text>
+    </view>
+  </view>
+</view>

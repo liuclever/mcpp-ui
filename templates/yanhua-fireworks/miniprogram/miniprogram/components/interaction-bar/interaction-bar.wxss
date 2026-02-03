@@ -1,0 +1,137 @@
+/* components/interaction-bar/interaction-bar.wxss */
+
+.interaction-bar {
+  display: flex;
+  align-items: center;
+  gap: 32rpx;
+}
+
+/* 横向布局（默认） */
+.interaction-bar.horizontal {
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+/* 纵向布局（信息流模式） */
+.interaction-bar.vertical {
+  flex-direction: column;
+  justify-content: center;
+  gap: 40rpx;
+}
+
+.interaction-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.interaction-item:active {
+  transform: scale(0.95);
+}
+
+.icon-wrapper {
+  width: 48rpx;
+  height: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* 点赞动画 */
+.icon-wrapper.animating {
+  animation: likeAnimation 0.6s ease;
+}
+
+@keyframes likeAnimation {
+  0% {
+    transform: scale(1);
+  }
+  15% {
+    transform: scale(1.3);
+  }
+  30% {
+    transform: scale(0.9);
+  }
+  45% {
+    transform: scale(1.15);
+  }
+  60% {
+    transform: scale(0.95);
+  }
+  75% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.icon {
+  width: 100%;
+  height: 100%;
+}
+
+.count {
+  font-size: 24rpx;
+  color: #666;
+  line-height: 1;
+  min-width: 48rpx;
+  text-align: center;
+}
+
+/* 纵向布局时的样式调整 */
+.vertical .icon-wrapper {
+  width: 96rpx;  /* 进一步增大图标尺寸 */
+  height: 96rpx;
+  background-color: rgba(0, 0, 0, 0.7);  /* 更深的背景 */
+  border-radius: 50%;  /* 圆形背景 */
+  padding: 16rpx;  /* 增加内边距 */
+  border: 2rpx solid rgba(255, 255, 255, 0.3);  /* 添加淡白色边框 */
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.8);  /* 添加阴影 */
+}
+
+.vertical .icon {
+  filter: drop-shadow(0 2rpx 8rpx rgba(0, 0, 0, 0.9)) brightness(1.5);  /* 增强阴影和亮度 */
+}
+
+/* 收藏图标样式 - 与点赞图标保持一致 */
+.vertical .collect-icon {
+  /* 使用与点赞相同的样式 */
+}
+
+/* 已收藏状态 - 粉色高亮 */
+.vertical .interaction-item .icon-wrapper image[src*="视频收藏-1"] {
+  filter: drop-shadow(0 0 12rpx rgba(255, 105, 180, 0.8)) brightness(1.3) saturate(1.5);
+}
+
+.vertical .count {
+  font-size: 28rpx;  /* 增大字体 */
+  font-weight: 700;  /* 更粗字体 */
+  color: #fff;
+  text-shadow: 0 2rpx 4rpx rgba(0, 0, 0, 1), 0 0 8rpx rgba(0, 0, 0, 0.8);  /* 双层阴影增强对比 */
+}
+
+/* 已点赞状态 - 红色高亮 */
+.interaction-item .icon-wrapper image[src*="视频点赞-1"] {
+  filter: brightness(1.2) saturate(1.3);
+}
+
+/* 已收藏状态 - 粉色高亮 */
+.interaction-item .icon-wrapper image[src*="filled"],
+.interaction-item .icon-wrapper image[src*="pink"] {
+  filter: brightness(1.2) saturate(1.3);
+}
+
+/* 纵向布局时的已点赞状态 - 更明显的效果 */
+.vertical .interaction-item .icon-wrapper image[src*="视频点赞-1"] {
+  filter: drop-shadow(0 0 12rpx rgba(255, 50, 50, 0.8)) brightness(1.3) saturate(1.5);
+}
+
+/* 纵向布局时的已收藏状态 - 更明显的效果 */
+.vertical .interaction-item .icon-wrapper image[src*="filled"] {
+  filter: drop-shadow(0 0 12rpx rgba(255, 105, 180, 0.8)) brightness(1.3) saturate(1.5);
+}

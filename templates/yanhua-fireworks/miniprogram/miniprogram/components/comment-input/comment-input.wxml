@@ -1,0 +1,60 @@
+<!--components/comment-input/comment-input.wxml-->
+
+<view class="comment-input-container" wx:if="{{show}}">
+  <!-- 遮罩层 -->
+  <view class="comment-input-mask" bindtap="onCancel"></view>
+  
+  <!-- 输入区域 -->
+  <view class="comment-input-wrapper" catchtap="onWrapperTap">
+    <!-- 回复提示 -->
+    <view class="reply-hint" wx:if="{{replyToName}}">
+      <text class="reply-text">回复 @{{replyToName}}</text>
+      <text class="cancel-reply" bindtap="onCancel">×</text>
+    </view>
+    
+    <!-- 输入框区域 -->
+    <view class="input-area">
+      <!-- 文本输入框 -->
+      <textarea
+        class="comment-textarea"
+        placeholder="{{placeholder}}"
+        placeholder-class="placeholder"
+        value="{{content}}"
+        maxlength="{{maxLength}}"
+        auto-height
+        show-confirm-bar="{{false}}"
+        adjust-position="{{true}}"
+        focus="{{focused}}"
+        bindinput="onInput"
+        bindfocus="onFocus"
+        bindblur="onBlur"
+      />
+      
+      <!-- 字数统计 -->
+      <view class="char-count">
+        <text class="{{charCount > maxLength ? 'over-limit' : ''}}">
+          {{charCount}}/{{maxLength}}
+        </text>
+      </view>
+    </view>
+    
+    <!-- 操作按钮 -->
+    <view class="action-buttons">
+      <button 
+        class="cancel-btn" 
+        bindtap="onCancel"
+        disabled="{{submitting}}"
+      >
+        取消
+      </button>
+      <button 
+        class="submit-btn {{submitting ? 'submitting' : ''}}" 
+        bindtap="onSubmit"
+        disabled="{{submitting}}"
+        loading="{{submitting}}"
+      >
+        {{submitting ? '发送中...' : '发送'}}
+      </button>
+    </view>
+  </view>
+</view>

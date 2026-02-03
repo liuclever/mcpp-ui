@@ -1,0 +1,141 @@
+<view class="container">
+  <!-- 顶部品牌大图区域 - 使用后台配置的顶图 -->
+  <view class="brand-header" wx:if="{{isLoggedIn}}">
+    <image class="brand-bg" src="{{topBannerUrl || 'https://zhengpan-fireworks-1392575669.cos.ap-shanghai.myqcloud.com/miniprogram/assets/images/about-banner.png'}}" mode="widthFix"></image>
+    <!-- 底部用户卡片 -->
+    <view class="user-card">
+      <image class="user-avatar" src="{{userInfo.avatar || 'https://zhengpan-fireworks-1392575669.cos.ap-shanghai.myqcloud.com/miniprogram/assets/images/default-avatar.png'}}" mode="aspectFill"></image>
+      <view class="user-info">
+        <text class="user-name">{{userInfo.nickname || '用户名'}}</text>
+        <text class="user-account">账号ID: {{userInfo.id || '10210121'}}</text>
+      </view>
+      <view class="logout-btn" bindtap="handleLogout">
+        <text class="logout-text">退出账号</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 已登录状态 - 用户资料展示 -->
+  <view class="profile-section" wx:if="{{isLoggedIn}}">
+    <!-- 编辑资料入口 -->
+    <view class="profile-item clickable" bindtap="goEditProfile">
+      <text class="profile-label">编辑资料</text>
+      <view class="profile-content">
+        <view class="profile-preview">
+          <image class="profile-avatar-small" src="{{userInfo.avatar || 'https://zhengpan-fireworks-1392575669.cos.ap-shanghai.myqcloud.com/miniprogram/assets/images/default-avatar.png'}}" mode="aspectFill"></image>
+          <text class="profile-nickname">{{userInfo.nickname || '未设置'}}</text>
+        </view>
+        <text class="profile-arrow">></text>
+      </view>
+    </view>
+
+    <!-- 积分 -->
+    <view class="profile-item clickable" bindtap="goPointsHistory">
+      <text class="profile-label">积分</text>
+      <view class="profile-content">
+        <text class="profile-text points-value">{{userInfo.points || 0}}</text>
+        <text class="profile-arrow">></text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 未登录状态 -->
+  <view class="login-section" wx:else>
+    <view class="login-card" bindtap="goLogin">
+      <image class="login-avatar" src="https://zhengpan-fireworks-1392575669.cos.ap-shanghai.myqcloud.com/miniprogram/assets/images/default-avatar.png" mode="aspectFill"></image>
+      <text class="login-text">点击登录</text>
+    </view>
+  </view>
+
+  <!-- 功能菜单 - 仅登录后显示 -->
+  <view class="function-menu" wx:if="{{isLoggedIn}}">
+    <!-- 账号绑定管理 -->
+    <view class="menu-section-title">账号绑定</view>
+    
+    <!-- 已绑定的登录方式 -->
+    <view class="menu-item-with-action" wx:if="{{bindingStatus.hasPhone}}">
+      <view class="menu-left">
+        <text class="menu-label">手机号</text>
+        <text class="bound-text">{{bindingStatus.phone || '已绑定'}}</text>
+      </view>
+      <text class="unbind-button" bindtap="handleUnbindPhone">解绑</text>
+    </view>
+    
+    <view class="menu-item-with-action" wx:if="{{bindingStatus.hasWechat}}">
+      <view class="menu-left">
+        <text class="menu-label">微信</text>
+        <text class="bound-text">{{bindingStatus.wechatNickname || '已绑定'}}</text>
+      </view>
+      <text class="unbind-button" bindtap="handleUnbindWechat">解绑</text>
+    </view>
+    
+    <!-- 未绑定的登录方式 - 显示绑定入口 -->
+    <!-- 绑定手机号选项 - 只在未绑定且不是手机号登录时显示 -->
+    <view class="menu-item" wx:if="{{!bindingStatus.hasPhone && bindingStatus.loginMethod !== 'phone'}}" bindtap="goToBindPhone">
+      <text class="menu-label">绑定手机号</text>
+      <text class="menu-arrow">></text>
+    </view>
+    
+    <!-- 绑定微信选项 - 只在未绑定且不是微信登录时显示 -->
+    <view class="menu-item" wx:if="{{!bindingStatus.hasWechat && bindingStatus.loginMethod !== 'wechat'}}" bindtap="goToBindWechat">
+      <text class="menu-label">绑定微信</text>
+      <text class="menu-arrow">></text>
+    </view>
+    
+    <!-- 修改密码入口 - 仅已绑定手机号时显示 -->
+    <view class="menu-item" wx:if="{{bindingStatus.hasPhone}}" bindtap="goToChangePassword">
+      <text class="menu-label">修改密码</text>
+      <text class="menu-arrow">></text>
+    </view>
+    
+    <!-- 我的内容 -->
+    <view class="menu-section-title">我的内容</view>
+    
+    <view class="menu-item" bindtap="goToCollect">
+      <text class="menu-label">我的收藏</text>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="goToPublish">
+      <text class="menu-label">我的发布</text>
+      <text class="menu-arrow">></text>
+    </view>
+    <view class="menu-item" bindtap="goToLike">
+      <text class="menu-label">我的点赞</text>
+      <text class="menu-arrow">></text>
+    </view>
+    
+    <!-- 积分规则入口 -->
+    <!-- 需求：4.1 - 小程序应在"我的"页面上提供查看积分规则的入口 -->
+    <!-- 需求：6.1 - 小程序应在"我的"页面上显示积分规则的明确标记入口 -->
+    <view class="menu-item" bindtap="navigateToPointsRules">
+      <text class="menu-label">积分规则</text>
+      <text class="menu-arrow">></text>
+    </view>
+    
+    <!-- 积分明细入口 -->
+    <view class="menu-item" bindtap="navigateToPointsHistory">
+      <text class="menu-label">积分明细</text>
+      <text class="menu-arrow">></text>
+    </view>
+  </view>
+
+  <!-- 保存按钮 - 仅编辑模式下显示 -->
+  <view class="save-button-container" wx:if="{{isLoggedIn && isEditMode}}">
+    <button class="save-button" bindtap="saveUserInfo">保存</button>
+  </view>
+
+  <!-- 底部提示 -->
+  <view class="footer-notice">
+    <text>该系统全部产品均为企业产品展示，仅供二维码扫码查看产品真实效果；如有人转发该页面进行在线推荐或者销售行为均属违法行为，烟花必须前往正规网点购买。请第一时间联系技术支持电话，坚决打击违法犯罪！烟花必须前往正规网点购买！</text>
+  </view>
+
+  <!-- 底部品牌 -->
+  <view class="footer-brand">
+    <image src="/assets/images/brand-logo.png" class="footer-logo" mode="widthFix"></image>
+    <view class="footer-info">
+      <text class="footer-title">儿童安全烟花</text>
+      <text class="footer-desc">浏阳出品·专为孩子研发的高品质安全烟花</text>
+    </view>
+  </view>
+
+</view>

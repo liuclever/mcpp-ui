@@ -1,0 +1,111 @@
+<view class="container">
+  <!-- 顶部导航栏 -->
+  <nav-bar title="{{product.name}}" showBack="{{true}}"></nav-bar>
+
+  <!-- 顶部标签 -->
+  <view class="top-bar">
+    <view class="top-content">
+      <view class="top-row">
+        <view class="top-left" bindtap="goBack">
+          <image src="/assets/icons/back-arrow.png" class="back-arrow"></image>
+        </view>
+        <view class="tab-btn active">实拍</view>
+      </view>
+      <text class="duration-tip">{{burnDurationTip}}</text>
+    </view>
+  </view>
+
+  <!-- 视频播放器 -->
+  <view class="video-wrapper">
+    <video 
+      id="productVideo"
+      src="{{videoUrl}}"
+      controls="{{isFullScreen}}"
+      autoplay="{{true}}"
+      loop="{{true}}"
+      show-center-play-btn="{{true}}"
+      show-fullscreen-btn="{{true}}"
+      show-play-btn="{{true}}"
+      enable-progress-gesture="{{true}}"
+      object-fit="contain"
+      class="video-player"
+      bindtap="togglePlay"
+      bindplay="onPlay"
+      bindpause="onPause"
+      bindended="onEnded"
+      bindtimeupdate="onTimeUpdate"
+      bindfullscreenchange="onFullScreenChange"
+    ></video>
+    
+    <!-- 播放按钮 -->
+    <view class="play-overlay" wx:if="{{!isPlaying}}" bindtap="togglePlay">
+      <image src="/assets/icons/play-big.png" class="play-big-icon"></image>
+    </view>
+  </view>
+
+  <!-- 右侧操作栏 -->
+  <view class="side-actions">
+    <view class="action-item" bindtap="changeSpeed">
+      <image src="/assets/icons/speed-btn.png" class="action-icon" mode="aspectFit"></image>
+      <text>倍速播放</text>
+    </view>
+    <view class="action-item" bindtap="toggleFullScreen">
+      <image src="{{isFullScreen ? '/assets/icons/collapse.png' : '/assets/icons/expand.png'}}" class="action-icon" mode="aspectFit"></image>
+      <text>全屏</text>
+    </view>
+    <view class="action-item" bindtap="goOfficial">
+      <image src="/assets/icons/official-btn.png" class="action-icon" mode="aspectFit"></image>
+      <text>官网</text>
+    </view>
+    <view class="action-item" bindtap="toggleLike">
+      <image src="{{isLiked ? '/assets/icons/视频点赞-1.png' : '/assets/icons/视频点赞-0.png'}}" class="action-icon" mode="aspectFit"></image>
+      <text>{{likeCount}}</text>
+    </view>
+    <view class="action-item" bindtap="goNearby">
+      <image src="/assets/icons/nearby-btn.png" class="action-icon" mode="aspectFit"></image>
+      <text>附近网点</text>
+    </view>
+    <view class="action-item" bindtap="goDetail">
+      <image src="/assets/icons/detail-btn.png" class="action-icon" mode="aspectFit"></image>
+      <text>产品详情</text>
+    </view>
+  </view>
+
+  <!-- 底部产品信息 -->
+  <view class="bottom-info">
+    <view class="product-name">名称：{{product.name}}</view>
+    <view class="product-name-en">{{product.nameEn}}</view>
+    <view class="product-specs">
+      <text>编号：{{product.code}}</text>
+      <text>含量：{{product.content}}</text>
+      <text>{{currentTime}} / {{totalTime}}</text>
+    </view>
+  </view>
+
+  <!-- 进度条 -->
+  <view class="progress-bar">
+    <slider 
+      value="{{progress}}" 
+      min="0" 
+      max="100" 
+      activeColor="#d03a6a" 
+      backgroundColor="rgba(255,255,255,0.3)"
+      block-size="12"
+      bindchange="onProgressChange"
+    />
+    <view class="time-info">
+      <text>{{currentTime}}</text>
+      <text>{{totalTime}}</text>
+    </view>
+  </view>
+</view>
+
+<!-- 倍速选择弹窗 -->
+<view class="speed-modal" wx:if="{{showSpeedModal}}" bindtap="hideSpeedModal">
+  <view class="speed-list" catchtap="">
+    <view class="speed-item {{playbackRate === 0.5 ? 'active' : ''}}" bindtap="setSpeed" data-rate="0.5">0.5x</view>
+    <view class="speed-item {{playbackRate === 1.0 ? 'active' : ''}}" bindtap="setSpeed" data-rate="1.0">1.0x</view>
+    <view class="speed-item {{playbackRate === 1.5 ? 'active' : ''}}" bindtap="setSpeed" data-rate="1.5">1.5x</view>
+    <view class="speed-item {{playbackRate === 2.0 ? 'active' : ''}}" bindtap="setSpeed" data-rate="2.0">2.0x</view>
+  </view>
+</view>

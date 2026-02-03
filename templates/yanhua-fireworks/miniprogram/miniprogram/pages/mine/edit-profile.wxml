@@ -1,0 +1,55 @@
+<view class="container">
+  <!-- 顶部导航栏 -->
+  <view class="nav-bar">
+    <view class="back-btn" bindtap="goBack">
+      <text class="back-icon">←</text>
+      <text class="back-text">返回</text>
+    </view>
+    <text class="nav-title">编辑资料</text>
+    <view class="nav-placeholder"></view>
+  </view>
+
+  <!-- 编辑表单 -->
+  <view class="form-section">
+    <!-- 头像 -->
+    <view class="form-item" bindtap="chooseAvatar">
+      <text class="form-label">头像</text>
+      <view class="form-content">
+        <image class="avatar-preview" src="{{avatar || 'https://zhengpan-fireworks-1392575669.cos.ap-shanghai.myqcloud.com/miniprogram/assets/images/default-avatar.png'}}" mode="aspectFill"></image>
+        <text class="form-arrow">></text>
+      </view>
+    </view>
+
+    <!-- 昵称 -->
+    <view class="form-item">
+      <text class="form-label">昵称</text>
+      <view class="form-content">
+        <input 
+          class="form-input" 
+          value="{{nickname}}" 
+          placeholder="请输入昵称"
+          maxlength="20"
+          bindinput="onNicknameInput"
+        />
+      </view>
+    </view>
+
+    <!-- 所在地区 -->
+    <view class="form-item">
+      <text class="form-label">所在地区</text>
+      <view class="form-content">
+        <picker mode="region" bindchange="onRegionChange" value="{{regionValue}}">
+          <view class="form-picker">
+            <text class="form-text {{region ? '' : 'placeholder'}}">{{region || '请选择所在地区'}}</text>
+            <text class="form-arrow">></text>
+          </view>
+        </picker>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部保存按钮 -->
+  <view class="bottom-save">
+    <button class="save-button" bindtap="saveProfile">保存修改</button>
+  </view>
+</view>

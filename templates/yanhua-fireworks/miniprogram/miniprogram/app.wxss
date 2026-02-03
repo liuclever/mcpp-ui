@@ -1,0 +1,105 @@
+/**app.wxss**/
+page {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 28rpx;
+  color: #333;
+  background-color: #f5f5f5;
+}
+
+.container {
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* 主题色 */
+.text-primary { color: #d03a6a; }
+.bg-primary { background-color: #d03a6a; }
+.border-primary { border-color: #d03a6a; }
+
+/* 通用按钮 */
+.btn-primary {
+  background: linear-gradient(135deg, #d03a6a 0%, #e91e63 100%);
+  color: #fff;
+  border: none;
+  border-radius: 40rpx;
+  padding: 20rpx 60rpx;
+  font-size: 30rpx;
+}
+
+.btn-outline {
+  background: #fff;
+  color: #d03a6a;
+  border: 2rpx solid #d03a6a;
+  border-radius: 40rpx;
+  padding: 18rpx 58rpx;
+  font-size: 30rpx;
+}
+
+/* 卡片样式 */
+.card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin: 20rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0,0,0,0.05);
+}
+
+/* Flex布局 */
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.flex-1 { flex: 1; }
+
+/* 间距 */
+.m-20 { margin: 20rpx; }
+.mt-20 { margin-top: 20rpx; }
+.mb-20 { margin-bottom: 20rpx; }
+.p-20 { padding: 20rpx; }
+.pt-20 { padding-top: 20rpx; }
+.pb-20 { padding-bottom: 20rpx; }
+
+/* 文字 */
+.text-center { text-align: center; }
+.text-white { color: #fff; }
+.text-gray { color: #999; }
+.text-sm { font-size: 24rpx; }
+.text-lg { font-size: 32rpx; }
+.text-xl { font-size: 36rpx; }
+.font-bold { font-weight: bold; }
+
+/* 搜索框 */
+.search-box {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 36rpx;
+  padding: 16rpx 24rpx;
+  margin: 20rpx;
+}
+
+.search-box input {
+  flex: 1;
+  margin-left: 16rpx;
+  font-size: 28rpx;
+}
+
+/* 分割线 */
+.divider {
+  height: 1rpx;
+  background: #eee;
+  margin: 20rpx 0;
+}
+
+/* 安全区域 */
+.safe-bottom {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* 自定义导航栏页面容器 */
+.page-with-navbar {
+  padding-top: 88rpx;
+} 

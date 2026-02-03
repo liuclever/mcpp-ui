@@ -1,0 +1,189 @@
+.video-card {
+  width: 100%;
+  background: #fff;
+  overflow: hidden;
+}
+
+/* 图墙模式样式 */
+.video-card-grid {
+  border-radius: 12rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+}
+
+.grid-mode {
+  display: flex;
+  flex-direction: column;
+}
+
+.grid-mode .video-cover {
+  width: 100%;
+  height: 240rpx;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12rpx 12rpx 0 0;
+}
+
+.grid-mode .cover-image {
+  width: 100%;
+  height: 100%;
+}
+
+.grid-mode .play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60rpx;
+  height: 60rpx;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.grid-mode .play-icon-img {
+  width: 32rpx;
+  height: 32rpx;
+  margin-left: 4rpx;
+}
+
+.grid-mode .video-info {
+  padding: 16rpx;
+}
+
+.grid-mode .video-title {
+  font-size: 28rpx;
+  color: #333;
+  line-height: 40rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  margin-bottom: 12rpx;
+}
+
+.grid-mode .video-stats {
+  display: flex;
+  align-items: center;
+}
+
+.grid-mode .stat-icon {
+  width: 28rpx;
+  height: 28rpx;
+  margin-right: 8rpx;
+}
+
+.grid-mode .stat-text {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 列表模式样式 */
+.video-card-list {
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.list-mode {
+  display: flex;
+  padding: 24rpx;
+}
+
+.list-mode .video-cover {
+  width: 240rpx;
+  height: 180rpx;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12rpx;
+  flex-shrink: 0;
+  margin-right: 24rpx;
+}
+
+.list-mode .cover-image {
+  width: 100%;
+  height: 100%;
+}
+
+.list-mode .play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60rpx;
+  height: 60rpx;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.list-mode .play-icon-img {
+  width: 32rpx;
+  height: 32rpx;
+  margin-left: 4rpx;
+}
+
+.list-mode .video-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.list-mode .video-title {
+  font-size: 30rpx;
+  color: #333;
+  font-weight: 500;
+  line-height: 42rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  margin-bottom: 12rpx;
+}
+
+.list-mode .user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.list-mode .user-avatar {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  margin-right: 12rpx;
+}
+
+.list-mode .user-name {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.list-mode .video-stats {
+  display: flex;
+  align-items: center;
+}
+
+.list-mode .stat-item {
+  display: flex;
+  align-items: center;
+  margin-right: 32rpx;
+}
+
+.list-mode .stat-icon {
+  width: 28rpx;
+  height: 28rpx;
+  margin-right: 8rpx;
+}
+
+.list-mode .stat-text {
+  font-size: 24rpx;
+  color: #999;
+}

@@ -1,0 +1,296 @@
+/* components/comment-list/comment-list.wxss */
+
+.comment-list {
+  width: 100%;
+  background-color: #fff;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80rpx 0;
+}
+
+.empty-icon {
+  width: 120rpx;
+  height: 120rpx;
+  opacity: 0.3;
+  margin-bottom: 20rpx;
+}
+
+.empty-text {
+  font-size: 32rpx;
+  color: #999;
+  margin-bottom: 10rpx;
+}
+
+.empty-hint {
+  font-size: 28rpx;
+  color: #ccc;
+}
+
+/* 评论列表 */
+.comment-items {
+  padding: 0 30rpx;
+}
+
+/* 评论项 */
+.comment-item {
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.comment-item:last-child {
+  border-bottom: none;
+}
+
+/* 评论主体 */
+.comment-main {
+  display: flex;
+  align-items: flex-start;
+}
+
+/* 用户头像 */
+.user-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+/* 评论内容区 */
+.comment-content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* 用户名 */
+.user-name {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+/* 评论文本 */
+.comment-text {
+  font-size: 30rpx;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 15rpx;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.reply-to {
+  color: #1989fa;
+  margin-right: 5rpx;
+}
+
+.content {
+  color: #333;
+}
+
+/* 评论信息栏 */
+.comment-info {
+  display: flex;
+  align-items: center;
+  font-size: 26rpx;
+  color: #999;
+}
+
+.time {
+  margin-right: 30rpx;
+}
+
+.reply-btn {
+  margin-right: auto;
+  padding: 5rpx 15rpx;
+  color: #666;
+}
+
+.reply-btn text {
+  font-size: 26rpx;
+}
+
+/* 点赞按钮 */
+.like-btn {
+  display: flex;
+  align-items: center;
+  padding: 5rpx 10rpx;
+}
+
+.like-icon {
+  width: 32rpx;
+  height: 32rpx;
+  margin-right: 5rpx;
+}
+
+.like-count {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.like-btn.liked .like-count {
+  color: #ff4d4f;
+}
+
+/* 子评论区域 */
+.children-comments {
+  margin-top: 20rpx;
+  padding: 20rpx;
+  background-color: #f7f8fa;
+  border-radius: 8rpx;
+}
+
+/* 展开/收起按钮 */
+.expand-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10rpx 0;
+  cursor: pointer;
+}
+
+.expand-text {
+  font-size: 26rpx;
+  color: #1989fa;
+}
+
+.expand-icon {
+  width: 24rpx;
+  height: 24rpx;
+  transition: transform 0.3s;
+}
+
+.expand-icon.expanded {
+  transform: rotate(180deg);
+}
+
+/* 子评论列表 */
+.children-list {
+  margin-top: 15rpx;
+}
+
+/* 子评论项 */
+.child-comment {
+  display: flex;
+  align-items: flex-start;
+  padding: 15rpx 0;
+  border-top: 1rpx solid #e8e8e8;
+}
+
+.child-comment:first-child {
+  border-top: none;
+}
+
+/* 子评论头像 */
+.child-avatar {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  margin-right: 15rpx;
+  flex-shrink: 0;
+}
+
+/* 子评论内容 */
+.child-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.child-name {
+  font-size: 26rpx;
+  color: #333;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.child-text {
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.5;
+  margin-bottom: 10rpx;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+/* 子评论信息栏 */
+.child-info {
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+  color: #999;
+}
+
+.child-info .time {
+  margin-right: 20rpx;
+}
+
+.child-info .reply-btn {
+  margin-right: auto;
+  padding: 5rpx 10rpx;
+}
+
+.child-info .reply-btn text {
+  font-size: 24rpx;
+}
+
+.child-info .like-btn {
+  padding: 5rpx 8rpx;
+}
+
+.child-info .like-icon {
+  width: 28rpx;
+  height: 28rpx;
+}
+
+.child-info .like-count {
+  font-size: 24rpx;
+}
+
+/* 加载更多 */
+.load-more {
+  padding: 30rpx 0;
+  text-align: center;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.load-more-btn {
+  padding: 15rpx 40rpx;
+  background-color: #f7f8fa;
+  border-radius: 40rpx;
+  display: inline-block;
+}
+
+.load-more-text {
+  font-size: 28rpx;
+  color: #666;
+}
+
+/* 没有更多 */
+.no-more {
+  padding: 30rpx 0;
+  text-align: center;
+}
+
+.no-more-text {
+  font-size: 26rpx;
+  color: #ccc;
+}

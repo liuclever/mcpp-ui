@@ -1,0 +1,292 @@
+/* 品牌故事列表页样式 */
+.brand-list-container {
+  min-height: 100vh;
+  background-color: #fce4ec;
+}
+
+/* 加载中状态 */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 200rpx 0;
+}
+
+.loading-spinner {
+  width: 60rpx;
+  height: 60rpx;
+  border: 4rpx solid #e0e0e0;
+  border-top-color: #d32f2f;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  margin-top: 20rpx;
+  font-size: 28rpx;
+  color: #999;
+}
+
+/* 错误状态 */
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 200rpx 40rpx;
+}
+
+.error-icon {
+  width: 120rpx;
+  height: 120rpx;
+  margin-bottom: 30rpx;
+}
+
+.error-text {
+  font-size: 28rpx;
+  color: #999;
+  margin-bottom: 40rpx;
+}
+
+.retry-button {
+  padding: 20rpx 60rpx;
+  background-color: #d32f2f;
+  color: #fff;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  border: none;
+}
+
+/* 空状态 */
+.empty-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 200rpx 40rpx;
+}
+
+.empty-icon {
+  width: 200rpx;
+  height: 200rpx;
+  margin-bottom: 30rpx;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999;
+}
+
+/* 列表内容 */
+.list-content {
+  padding: 20rpx 30rpx;
+}
+
+.story-item {
+  padding: 30rpx 0;
+  background: transparent;
+  border-bottom: 1rpx solid rgba(208, 58, 106, 0.2);
+}
+
+.story-item-image {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+/* 图片列表形式 */
+.image-grid-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20rpx;
+  width: 100%;
+}
+
+.image-grid-item {
+  width: 48%;
+  flex-shrink: 0;
+  background: #fff;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+}
+
+.grid-image {
+  width: 100%;
+  height: 240rpx;
+  display: block;
+}
+
+.grid-title {
+  padding: 16rpx 20rpx 8rpx;
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.grid-meta {
+  padding: 0 20rpx 16rpx;
+  text-align: center;
+}
+
+.grid-views {
+  font-size: 22rpx;
+  color: #d03a6a;
+}
+
+/* 图文形式 - 上标题下图片 */
+.article-item {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
+}
+
+.article-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.4;
+  margin-bottom: 20rpx;
+}
+
+.article-images {
+  display: flex;
+  gap: 12rpx;
+  margin-bottom: 20rpx;
+}
+
+.article-image {
+  border-radius: 8rpx;
+  background: #f0f0f0;
+}
+
+.article-image.single {
+  width: 100%;
+  height: 300rpx;
+}
+
+.article-image.double {
+  width: calc(50% - 6rpx);
+  height: 200rpx;
+}
+
+.article-image.triple {
+  width: calc(33.33% - 8rpx);
+  height: 160rpx;
+}
+
+.article-meta {
+  display: flex;
+  align-items: center;
+}
+
+.article-views {
+  font-size: 24rpx;
+  color: #d03a6a;
+}
+
+/* 封面图 */
+.story-cover {
+  flex-shrink: 0;
+  width: 160rpx;
+  height: 120rpx;
+  margin-right: 24rpx;
+  border-radius: 8rpx;
+  overflow: hidden;
+  background-color: #f0f0f0;
+}
+
+.cover-image {
+  width: 100%;
+  height: 100%;
+}
+
+/* 内容区域 */
+.story-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 120rpx;
+  overflow: hidden;
+}
+
+.story-title {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #333;
+  line-height: 1.4;
+  margin-bottom: 12rpx;
+}
+
+.story-summary {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 16rpx;
+}
+
+.story-meta {
+  display: flex;
+  align-items: center;
+}
+
+.story-views {
+  font-size: 24rpx;
+  color: #d03a6a;
+  margin-right: 20rpx;
+}
+
+.story-time {
+  font-size: 24rpx;
+  color: #d03a6a;
+}
+
+/* 箭头图标 */
+.story-arrow {
+  flex-shrink: 0;
+  margin-left: 16rpx;
+}
+
+.arrow-icon {
+  font-size: 48rpx;
+  color: #ccc;
+  font-weight: 300;
+}
+
+/* 加载更多 */
+.loading-more {
+  padding: 30rpx 0;
+  text-align: center;
+}
+
+.loading-more-text {
+  font-size: 26rpx;
+  color: #999;
+}
+
+/* 没有更多 */
+.no-more {
+  padding: 30rpx 0;
+  text-align: center;
+}
+
+.no-more-text {
+  font-size: 26rpx;
+  color: #d03a6a;
+}

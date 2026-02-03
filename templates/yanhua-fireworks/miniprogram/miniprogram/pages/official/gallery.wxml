@@ -1,0 +1,24 @@
+<view class="container">
+  <!-- 图片网格 -->
+  <view class="gallery-grid">
+    <view class="gallery-item" wx:for="{{images}}" wx:key="id" bindtap="previewImage" data-index="{{index}}">
+      <image src="{{item.imageUrl}}" mode="aspectFill" class="gallery-image"></image>
+      <view class="image-info" wx:if="{{item.title}}">
+        <text class="title">{{item.title}}</text>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 加载更多 -->
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+  <view class="no-more" wx:if="{{noMore && images.length > 0}}">
+    <text>没有更多了</text>
+  </view>
+  
+  <!-- 空状态 -->
+  <view class="empty" wx:if="{{!loading && images.length === 0}}">
+    <text>暂无图片</text>
+  </view>
+</view>

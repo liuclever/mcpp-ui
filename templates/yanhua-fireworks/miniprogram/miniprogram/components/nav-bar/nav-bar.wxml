@@ -1,0 +1,20 @@
+<view class="nav-bar" style="padding-top: {{statusBarHeight}}px;">
+  <view class="nav-content">
+    <view class="nav-left" bindtap="onClose" wx:if="{{showClose}}">
+      <text class="close-icon">×</text>
+    </view>
+    <view class="nav-left" bindtap="onBack" wx:elif="{{showBack}}">
+      <image src="/assets/icons/arrow-left-pink.png" class="back-icon"></image>
+    </view>
+    <view class="nav-center">
+      <text class="nav-title" wx:if="{{title}}">{{title}}</text>
+      <image src="/assets/images/brand-logo.png" class="brand-logo" mode="heightFix" wx:else></image>
+    </view>
+    <view class="nav-right" bindtap="onMore" wx:if="{{showMore}}">
+      <text class="more-icon">⋯</text>
+    </view>
+    <view class="nav-right" bindtap="onScan" wx:elif="{{showScan}}">
+      <image src="/assets/icons/scan-pink.png" class="scan-icon"></image>
+    </view>
+  </view>
+</view>

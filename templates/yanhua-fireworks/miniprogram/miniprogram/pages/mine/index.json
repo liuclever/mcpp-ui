@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "page-banner": "/components/page-banner/page-banner"
+  },
+  "navigationBarTitleText": "我的"
+}

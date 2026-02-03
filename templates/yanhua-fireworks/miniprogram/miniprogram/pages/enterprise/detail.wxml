@@ -1,0 +1,33 @@
+<!--企业中心内容详情页面-->
+<view class="detail-page">
+  <!-- 加载状态 -->
+  <view wx:if="{{loading}}" class="loading-container">
+    <view class="loading-text">加载中...</view>
+  </view>
+
+  <!-- 内容详情 -->
+  <view wx:elif="{{content}}" class="detail-content">
+    <!-- 详情头部（单页类型不显示） -->
+    <view class="detail-header" wx:if="{{!isSinglePage}}">
+      <view class="detail-title">{{content.title}}</view>
+      <view class="detail-meta">
+        <text class="detail-time">{{content.publishTime}}</text>
+        <text class="detail-views">{{content.viewCount}}次浏览</text>
+      </view>
+    </view>
+
+    <!-- 富文本内容 -->
+    <view class="detail-body">
+      <rich-text 
+        nodes="{{processedContent}}" 
+        bindtap="onRichTextTap"
+        data-selector="img,video"
+      />
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:else class="empty-container">
+    <view class="empty-text">内容不存在</view>
+  </view>
+</view>

@@ -1,0 +1,153 @@
+<!--pages/community/index.wxml-->
+<view class="community-page">
+  <!-- 顶图横幅 -->
+  <page-banner pageKey="community" position="top"></page-banner>
+  <!-- Banner卡片 - 始终显示两个 -->
+  <view class="banner-cards">
+    <!-- 第一个Banner卡片 -->
+    <view class="banner-card card-gradient-1" bindtap="onActivityTap" data-name="{{activities[0] ? activities[0].name : ''}}">
+      <text class="banner-card-title">{{activities[0] ? activities[0].name : 'XXX活动挑战赛'}}</text>
+    </view>
+    <!-- 第二个Banner卡片 -->
+    <view class="banner-card card-gradient-2" bindtap="onActivityTap" data-name="{{activities[1] ? activities[1].name : ''}}">
+      <text class="banner-card-title">{{activities[1] ? activities[1].name : '宝宝的第一次发烟花'}}</text>
+    </view>
+  </view>
+
+  <!-- 排序和布局切换栏 -->
+  <view class="toolbar" wx:if="{{!isEmpty}}">
+    <view class="sort-tabs">
+      <view class="sort-tab {{sortType === 'views' ? 'active' : ''}}" bindtap="onSortChange" data-type="views">
+        <text>播放数</text>
+        <text class="sort-arrow">{{sortType === 'views' ? (sortOrder === 'desc' ? '▼' : '▲') : '▽'}}</text>
+      </view>
+      <view class="sort-tab {{sortType === 'comments' ? 'active' : ''}}" bindtap="onSortChange" data-type="comments">
+        <text>评论数</text>
+        <text class="sort-arrow">{{sortType === 'comments' ? (sortOrder === 'desc' ? '▼' : '▲') : '▽'}}</text>
+      </view>
+      <view class="sort-tab {{sortType === 'collects' ? 'active' : ''}}" bindtap="onSortChange" data-type="collects">
+        <text>收藏数</text>
+        <text class="sort-arrow">{{sortType === 'collects' ? (sortOrder === 'desc' ? '▼' : '▲') : '▽'}}</text>
+      </view>
+    </view>
+    <view class="layout-switch" bindtap="toggleLayout">
+      <text class="layout-icon">{{layoutMode === 'double' ? '☰' : '▦'}}</text>
+    </view>
+  </view>
+
+  <!-- 双列布局 -->
+  <view class="video-grid" wx:if="{{!isEmpty && layoutMode === 'double'}}">
+    <view class="grid-column">
+      <block wx:for="{{videos}}" wx:key="id" wx:if="{{index % 2 === 0}}">
+        <view class="video-item" bindtap="onVideoTap" data-index="{{index}}">
+          <!-- 视频封面 -->
+          <image class="video-cover" src="{{item.coverUrl}}" mode="aspectFill" />
+          
+          <!-- 视频信息 -->
+          <view class="video-info">
+            <!-- 话题标签 + 标题 -->
+            <text class="video-hashtag">{{item.topics || ''}} {{item.title}}</text>
+            
+            <!-- 用户信息 -->
+            <view class="video-footer">
+              <view class="user-info">
+                <image class="user-avatar-small" src="{{item.userAvatar || '/assets/icons/default-avatar.png'}}" mode="aspectFill" />
+                <text class="user-name-small">{{item.userName || '用户名'}}</text>
+              </view>
+            </view>
+            
+            <!-- 互动信息 -->
+            <view class="interaction-info">
+              <text class="interaction-item">点赞{{item.likes}}</text>
+              <text class="interaction-item">评论{{item.comments}}</text>
+              <text class="interaction-item">收藏{{item.collects}}</text>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class="grid-column">
+      <block wx:for="{{videos}}" wx:key="id" wx:if="{{index % 2 === 1}}">
+        <view class="video-item" bindtap="onVideoTap" data-index="{{index}}">
+          <!-- 视频封面 -->
+          <image class="video-cover" src="{{item.coverUrl}}" mode="aspectFill" />
+          
+          <!-- 视频信息 -->
+          <view class="video-info">
+            <!-- 话题标签 + 标题 -->
+            <text class="video-hashtag">{{item.topics || ''}} {{item.title}}</text>
+            
+            <!-- 用户信息 -->
+            <view class="video-footer">
+              <view class="user-info">
+                <image class="user-avatar-small" src="{{item.userAvatar || '/assets/icons/default-avatar.png'}}" mode="aspectFill" />
+                <text class="user-name-small">{{item.userName || '用户名'}}</text>
+              </view>
+            </view>
+            
+            <!-- 互动信息 -->
+            <view class="interaction-info">
+              <text class="interaction-item">点赞{{item.likes}}</text>
+              <text class="interaction-item">评论{{item.comments}}</text>
+              <text class="interaction-item">收藏{{item.collects}}</text>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <!-- 单列布局 -->
+  <view class="video-list" wx:if="{{!isEmpty && layoutMode === 'single'}}">
+    <view class="video-card" wx:for="{{videos}}" wx:key="id" bindtap="onVideoTap" data-index="{{index}}">
+      <!-- 用户信息 -->
+      <view class="card-header">
+        <image class="user-avatar" src="{{item.userAvatar || '/assets/icons/default-avatar.png'}}" mode="aspectFill" />
+        <text class="user-name">{{item.userName || '用户名'}}</text>
+      </view>
+      
+      <!-- 视频标题和话题 -->
+      <view class="card-content">
+        <text class="video-hashtag">{{item.topics || ''}} {{item.title}}</text>
+        <image class="video-thumbnail" src="{{item.coverUrl}}" mode="aspectFill" />
+      </view>
+      
+      <!-- 互动信息 -->
+      <view class="card-interaction">
+        <text class="card-interaction-item">点赞{{item.likes}}</text>
+        <text class="card-interaction-item">评论{{item.comments}}</text>
+        <text class="card-interaction-item">收藏{{item.collects}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{isEmpty && !loading}}">
+    <!-- <image class="empty-icon" src="/assets/icons/warning.png" mode="aspectFit" /> -->
+    <text class="empty-icon-text">📹</text>
+    <text class="empty-text">暂无视频内容</text>
+    <view class="empty-btn" bindtap="onPublish">
+      <text>发布第一个视频</text>
+    </view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-state" wx:if="{{loading && !refreshing}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <!-- 没有更多 -->
+  <view class="no-more" wx:if="{{!hasMore && videos.length > 0 && !loading}}">
+    <text>没有更多了</text>
+  </view>
+
+  <!-- 发布按钮 -->
+  <view class="publish-fab" bindtap="onPublish">
+    <image class="publish-icon" src="/assets/icons/video-btn.png" mode="aspectFit" />
+    <text class="publish-text">发布</text>
+  </view>
+
+  <!-- 底图横幅 -->
+  <page-banner pageKey="community" position="bottom"></page-banner>
+</view>

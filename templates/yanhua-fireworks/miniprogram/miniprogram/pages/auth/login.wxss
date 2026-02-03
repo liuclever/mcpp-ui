@@ -1,0 +1,392 @@
+/* 登录页样式 */
+.container {
+  min-height: 100vh;
+  background: #fff;
+  padding-top: calc(180rpx + env(safe-area-inset-top));
+  padding-bottom: calc(160rpx + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tab栏（Pill） */
+.tab-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 80rpx;
+  padding-bottom: 30rpx;
+}
+
+/* 在 top-bar 下方添加白色间隙以覆盖粉色条并增大距离 */
+.top-gap {
+  height: 20rpx;
+  background: #fff;
+  width: 100%;
+  z-index: 8;
+}
+
+.tab-pill {
+  background: #fff;
+  width: 640rpx;
+  border-radius: 80rpx;
+  display: flex;
+  padding: 10rpx;
+  box-shadow: 0 6rpx 20rpx rgba(0,0,0,0.08);
+  z-index: 10;
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 28rpx 0;
+  border-radius: 60rpx;
+  font-size: 30rpx;
+  color: #999;
+}
+
+.tab-item.active {
+  background: linear-gradient(135deg, #d03a6a 0%, #e91e63 100%);
+  color: #fff;
+  box-shadow: 0 6rpx 18rpx rgba(208,58,106,0.18);
+}
+
+/* 表单卡片 */
+.form-card {
+  background: #fff;
+  margin: 80rpx 30rpx 20rpx 30rpx;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  box-shadow: 0 20rpx 60rpx rgba(0,0,0,0.12), 0 8rpx 24rpx rgba(0,0,0,0.08);
+  transform: translateZ(0);
+}
+
+/* 确保顶部条与卡片分离 */
+.top-bar {
+  position: relative;
+  z-index: 5;
+}
+
+.form-title {
+  display: block;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #e32665;
+  margin-bottom: 30rpx;
+  margin-left: 20rpx;
+}
+
+.form-item {
+  display: flex;
+  align-items: center;
+  border-bottom: 2rpx solid #f0f0f0;
+  padding: 20rpx 0;
+  margin-bottom: 16rpx;
+  margin-left: 20rpx;
+  margin-right: 20rpx;
+}
+
+.form-item input {
+  flex: 1;
+  font-size: 28rpx;
+  color: #666;
+  padding-left: 10rpx;
+  /* placeholder-style is used inline in WXML */
+}
+
+.input-icon {
+  width: 44rpx;
+  height: 44rpx;
+  opacity: 1;
+}
+
+/* 错误提示 */
+.error-tip {
+  color: #ff4444;
+  font-size: 24rpx;
+  margin: -10rpx 40rpx 10rpx 40rpx;
+  padding-left: 10rpx;
+}
+
+/* 密码强度指示器 */
+.password-strength {
+  display: flex;
+  align-items: center;
+  margin: 10rpx 40rpx 0 40rpx;
+  padding-left: 10rpx;
+}
+
+.strength-label {
+  font-size: 24rpx;
+  color: #999;
+  margin-right: 10rpx;
+}
+
+.strength-value {
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+.strength-weak {
+  color: #ff4444;
+}
+
+.strength-medium {
+  color: #ff9800;
+}
+
+.strength-strong {
+  color: #4caf50;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 38rpx 40rpx 30rpx 40rpx;
+}
+
+.forgot-link {
+  color: #999;
+  font-size: 26rpx;
+}
+
+.login-btn {
+  background: linear-gradient(135deg, #d03a6a 0%, #e91e63 100%);
+  color: #fff;
+  padding: 20rpx 80rpx;
+  border-radius: 40rpx;
+  font-size: 30rpx;
+}
+
+/* 分割线 */
+.divider-section {
+  padding: 30rpx 30rpx;
+  text-align: center;
+}
+
+.divider-text {
+  color: #e22766;
+  font-size: 22rpx;
+}
+
+.social-row {
+  display: flex;
+  justify-content: center;
+  gap: 100rpx;
+  margin-top: 60rpx;
+}
+
+/* social buttons - 图标本身已带圆形背景 */
+.social-button {
+  width: 80rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-icon-img {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+
+/* 底部提示 */
+.footer-notice {
+  padding: 0rpx 30rpx;
+  background: #fff;
+  margin: 0rpx 30rpx;
+  border-radius: 12rpx;
+}
+
+.footer-notice text {
+  font-size: 20rpx;
+  color: #d03a6a;
+  line-height: 1.5;
+}
+
+/* 底部品牌 */
+.footer-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  padding: 30rpx 0 20rpx 0;
+}
+
+.footer-brand-img {
+  width: 500rpx;
+}
+
+/* 自定义底部导航栏 */
+.custom-tabbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: #fff;
+  padding: 20rpx 0;
+  padding-bottom: calc(20rpx + env(safe-area-inset-bottom));
+  border-top: 1rpx solid #e5e5e5;
+  box-shadow: 0 -2rpx 8rpx rgba(0,0,0,0.05);
+  z-index: 1000;
+}
+
+.tabbar-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.tabbar-icon {
+  width: 48rpx;
+  height: 48rpx;
+  margin-bottom: 8rpx;
+}
+
+.tabbar-icon-active {
+  width: 48rpx;
+  height: 48rpx;
+  margin-bottom: 8rpx;
+}
+
+.tabbar-text {
+  font-size: 20rpx;
+  color: #999;
+}
+
+.tabbar-text-active {
+  font-size: 20rpx;
+  color: #d03a6a;
+  font-weight: 500;
+}
+
+/* 微信授权弹窗样式 */
+.auth-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-modal-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.auth-modal-content {
+  position: relative;
+  width: 600rpx;
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 40rpx;
+  z-index: 1;
+}
+
+.auth-modal-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  margin-bottom: 16rpx;
+}
+
+.auth-modal-desc {
+  font-size: 26rpx;
+  color: #999;
+  text-align: center;
+  margin-bottom: 40rpx;
+}
+
+/* 头像选择区域 */
+.auth-avatar-section {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30rpx;
+}
+
+.auth-avatar-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  line-height: normal;
+}
+
+.auth-avatar-btn::after {
+  border: none;
+}
+
+.auth-avatar-img {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  border: 4rpx dashed #ddd;
+}
+
+.auth-avatar-tip {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 16rpx;
+}
+
+/* 昵称输入区域 */
+.auth-nickname-section {
+  margin-bottom: 40rpx;
+}
+
+.auth-nickname-input {
+  width: 100%;
+  height: 88rpx;
+  border: 2rpx solid #eee;
+  border-radius: 12rpx;
+  padding: 0 24rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* 按钮区域 */
+.auth-modal-buttons {
+  display: flex;
+  gap: 20rpx;
+}
+
+.auth-btn-cancel,
+.auth-btn-confirm {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  text-align: center;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.auth-btn-cancel {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.auth-btn-confirm {
+  background: linear-gradient(135deg, #d03a6a 0%, #e91e63 100%);
+  color: #fff;
+}

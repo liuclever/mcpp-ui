@@ -1,0 +1,89 @@
+<!--components/comment-list/comment-list.wxml-->
+<wxs module="tools" src="./comment-list.wxs"></wxs>
+
+<view class="comment-list">
+  <!-- 空状态 -->
+  <view wx:if="{{showEmpty && comments.length === 0}}" class="empty-state">
+    <image class="empty-icon" src="/assets/icons/comment.png" mode="aspectFit"></image>
+    <text class="empty-text">暂无评论</text>
+    <text class="empty-hint">快来发表第一条评论吧~</text>
+  </view>
+
+  <!-- 评论列表 -->
+  <view wx:else class="comment-items">
+    <view 
+      wx:for="{{comments}}" 
+      wx:key="id" 
+      class="comment-item"
+      data-comment-id="{{item.id}}"
+    >
+      <!-- 评论主体 -->
+      <view class="comment-main">
+        <!-- 用户头像 -->
+        <image 
+          class="user-avatar" 
+          src="{{item.userAvatar || '/assets/images/default-avatar.png'}}" 
+          mode="aspectFill"
+        ></image>
+
+        <!-- 评论内容区 -->
+        <view class="comment-content">
+          <!-- 用户名 -->
+          <text class="user-name">{{item.userName}}</text>
+
+          <!-- 评论文本 -->
+          <view class="comment-text">
+            <!-- 评论内容 -->
+            <text class="content">{{item.content}}</text>
+          </view>
+
+          <!-- 评论信息栏 -->
+          <view class="comment-info">
+            <!-- 时间 -->
+            <text class="time">{{tools.formatTime(item.createTime)}}</text>
+
+            <!-- 回复按钮 -->
+            <view 
+              class="reply-btn"
+              data-comment="{{item}}"
+              catchtap="onReplyTap"
+            >
+              <text>回复</text>
+            </view>
+
+            <!-- 点赞 -->
+            <view 
+              class="like-btn {{item.isLiked ? 'liked' : ''}}"
+              data-comment="{{item}}"
+              catchtap="onLikeTap"
+            >
+              <image 
+                class="like-icon" 
+                src="{{item.isLiked ? '/assets/icons/heart-filled.png' : '/assets/icons/heart-gray.png'}}" 
+                mode="aspectFit"
+              ></image>
+              <text class="like-count" wx:if="{{item.likes > 0}}">
+                {{tools.formatNumber(item.likes)}}
+              </text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 加载更多 -->
+    <view wx:if="{{hasMore}}" class="load-more" catchtap="onLoadMore">
+      <view wx:if="{{loading}}" class="loading">
+        <text class="loading-text">加载中...</text>
+      </view>
+      <view wx:else class="load-more-btn">
+        <text class="load-more-text">加载更多评论</text>
+      </view>
+    </view>
+
+    <!-- 没有更多 -->
+    <view wx:if="{{!hasMore && comments.length > 0}}" class="no-more">
+      <text class="no-more-text">没有更多评论了</text>
+    </view>
+  </view>
+</view>

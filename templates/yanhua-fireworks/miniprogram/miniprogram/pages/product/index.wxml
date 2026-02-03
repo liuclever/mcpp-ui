@@ -1,0 +1,135 @@
+<view class="container">
+  <!-- 顶部背景区域 -->
+  <view class="header-section">
+    <!-- 背景图片 -->
+    <image src="https://zhengpan-fireworks-1392575669.cos.ap-shanghai.myqcloud.com/miniprogram/assets/images/product-bg.png" class="header-bg" mode="aspectFill"></image>
+    
+    <!-- 分类查找标题 -->
+    <view class="header-title">分类查找</view>
+    
+    <!-- 品牌Banner图片 -->
+    <view class="brand-banner-wrapper">
+      <image 
+        src="{{productHeaderImage}}" 
+        class="brand-banner" 
+        mode="widthFix"
+        lazy-load="{{true}}"
+        binderror="onImageError">
+      </image>
+    </view>
+  </view>
+
+  <!-- 搜索框 -->
+  <view class="search-box" bindtap="goSearch">
+    <view class="search-left">
+      <image src="/assets/icons/search.png" class="search-icon"></image>
+      <text class="search-placeholder">搜索您想查找的商品</text>
+    </view>
+    <view class="search-right">
+      <view class="search-divider"></view>
+      <image src="/assets/icons/scan-pink.png" class="scan-icon"></image>
+    </view>
+  </view>
+
+  <!-- 分割线装饰 -->
+  <view class="divider-wrapper">
+    <image src="/assets/images/divider.png" class="divider-img" mode="widthFix"></image>
+  </view>
+
+  <!-- 产品首页视频区域 -->
+  <view class="video-section" wx:if="{{productVideo.videoUrl}}">
+    <view class="video-container">
+      <!-- 视频封面（未播放时显示） -->
+      <view class="video-cover-wrapper" wx:if="{{!productVideoPlaying}}" bindtap="playProductVideo">
+        <image class="video-cover" src="{{productVideo.coverUrl}}" mode="aspectFill"></image>
+        <view class="video-title">{{productVideo.title}}</view>
+        <view class="play-btn">
+          <image src="/assets/icons/play.png" class="play-icon"></image>
+        </view>
+      </view>
+      <!-- 视频播放器（播放时显示） -->
+      <video 
+        wx:if="{{productVideoPlaying}}"
+        id="productVideo"
+        class="inline-video"
+        src="{{productVideo.videoUrl}}"
+        poster="{{productVideo.coverUrl}}"
+        autoplay="{{true}}"
+        controls="{{true}}"
+        show-fullscreen-btn="{{true}}"
+        show-play-btn="{{true}}"
+        show-center-play-btn="{{true}}"
+        enable-progress-gesture="{{true}}"
+        enable-auto-rotation="{{true}}"
+        bindended="onProductVideoEnded"
+        binderror="onProductVideoError"
+      ></video>
+    </view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view wx:if="{{loading}}" class="loading-container">
+    <text>加载中...</text>
+  </view>
+
+  <!-- 产品分类列表 -->
+  <view wx:else class="category-list">
+    <!-- 全部产品 -->
+    <view class="category-item" bindtap="viewAllProducts">
+      <view class="category-left">
+        <image src="{{categoryExpanded ? '/assets/icons/collapse.png' : '/assets/icons/expand.png'}}" class="category-toggle-icon" catchtap="toggleCategory"></image>
+        <view class="category-title">
+          <text class="title-text">全部产品</text>
+          <text class="title-sub">QUANBUCHANPIN</text>
+        </view>
+      </view>
+      <image src="/assets/images/category-all.png" class="category-btn-img" mode="heightFix"></image>
+    </view>
+
+    <!-- 一级分类列表（展开时显示） -->
+    <block wx:if="{{categoryExpanded}}">
+      <block wx:for="{{categories}}" wx:key="id" wx:for-item="category" wx:for-index="index">
+        <!-- 一级分类项 -->
+        <view class="category-item" 
+              data-index="{{index}}"
+              bindtap="selectParentCategory">
+          <view class="category-left">
+            <image src="{{category.expanded ? '/assets/icons/collapse.png' : '/assets/icons/expand.png'}}" 
+                   class="category-toggle-icon"></image>
+            <view class="category-title">
+              <text class="title-text">{{category.name}}</text>
+              <text class="title-sub">{{category.code}}</text>
+            </view>
+          </view>
+          <!-- 根据分类code显示对应图标 -->
+          <image src="/assets/images/category-{{category.code}}.png" 
+                 class="category-btn-img" 
+                 mode="heightFix"></image>
+        </view>
+
+        <!-- 子分类标签网格（当一级分类展开且有子分类时显示） -->
+        <view class="tag-grid" wx:if="{{category.expanded && category.children && category.children.length > 0}}">
+          <view class="tag-item" 
+                wx:for="{{category.children}}" 
+                wx:key="id"
+                wx:for-item="child"
+                data-category-id="{{child.id}}"
+                data-category-name="{{child.name}}"
+                catchtap="selectChildCategory">
+            {{child.name}}
+          </view>
+        </view>
+      </block>
+    </block>
+  </view>
+
+  <!-- 声明文字 -->
+  <view class="disclaimer">
+    <text class="disclaimer-text">该系统全部产品均为企业产品展示，仅供二维码扫码查看产品真实效果；如有人转发该页面进行在线推荐或者销售行为均属违法行为，烟花必须前往正规网点购买。请第一时间联系技术支持电话，坚决打击违法犯罪！烟花必须前往正规网点购买！</text>
+  </view>
+
+  <!-- 底部品牌信息 -->
+  <view class="footer-brand">
+    <image src="/assets/images/footer-logo.png" class="footer-logo-img" mode="widthFix"></image>
+  </view>
+</view>

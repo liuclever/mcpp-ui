@@ -1,0 +1,80 @@
+<!-- pages/test-interaction/test-interaction.wxml -->
+<view class="container">
+  <view class="section">
+    <view class="title">横向布局测试</view>
+    <view class="demo-box">
+      <interaction-bar
+        videoId="{{1}}"
+        likes="{{video1.likes}}"
+        collects="{{video1.collects}}"
+        comments="{{video1.comments}}"
+        shares="{{video1.shares}}"
+        isLiked="{{video1.isLiked}}"
+        isCollected="{{video1.isCollected}}"
+        layout="horizontal"
+        bind:like="onLike"
+        bind:collect="onCollect"
+        bind:comment="onComment"
+        bind:share="onShare"
+      />
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="title">纵向布局测试</view>
+    <view class="demo-box vertical-demo">
+      <view class="video-placeholder">视频区域</view>
+      <interaction-bar
+        videoId="{{2}}"
+        likes="{{video2.likes}}"
+        collects="{{video2.collects}}"
+        comments="{{video2.comments}}"
+        shares="{{video2.shares}}"
+        isLiked="{{video2.isLiked}}"
+        isCollected="{{video2.isCollected}}"
+        layout="vertical"
+        bind:like="onLike"
+        bind:collect="onCollect"
+        bind:comment="onComment"
+        bind:share="onShare"
+      />
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="title">大数字格式化测试</view>
+    <view class="demo-box">
+      <interaction-bar
+        videoId="{{3}}"
+        likes="{{video3.likes}}"
+        collects="{{video3.collects}}"
+        comments="{{video3.comments}}"
+        shares="{{video3.shares}}"
+        isLiked="{{video3.isLiked}}"
+        isCollected="{{video3.isCollected}}"
+        layout="horizontal"
+        bind:like="onLike"
+        bind:collect="onCollect"
+        bind:comment="onComment"
+        bind:share="onShare"
+      />
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="title">操作日志</view>
+    <view class="log-box">
+      <view class="log-item" wx:for="{{logs}}" wx:key="index">
+        {{item}}
+      </view>
+      <view class="log-empty" wx:if="{{logs.length === 0}}">
+        暂无操作记录
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="title">测试按钮</view>
+    <button bindtap="resetData" type="primary">重置数据</button>
+  </view>
+</view>

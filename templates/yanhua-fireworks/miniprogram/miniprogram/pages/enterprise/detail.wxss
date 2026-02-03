@@ -1,0 +1,86 @@
+/* 企业中心内容详情页面样式 */
+
+.detail-page {
+  min-height: 100vh;
+  background: #fce4ec;
+}
+
+/* 加载状态 */
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.loading-text {
+  font-size: 28rpx;
+  color: #999;
+}
+
+/* 空状态 */
+.empty-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.empty-text {
+  font-size: 28rpx;
+  color: #999;
+}
+
+/* 内容详情 */
+.detail-content {
+  background: #fff;
+  min-height: 100vh;
+}
+
+/* 详情头部 */
+.detail-header {
+  padding: 40rpx 30rpx 30rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.detail-title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.5;
+  margin-bottom: 20rpx;
+}
+
+.detail-meta {
+  display: flex;
+  align-items: center;
+  gap: 30rpx;
+  font-size: 24rpx;
+  color: #999;
+}
+
+.detail-time {
+  display: flex;
+  align-items: center;
+}
+
+.detail-views {
+  display: flex;
+  align-items: center;
+}
+
+/* 详情内容 */
+.detail-body {
+  padding: 30rpx;
+  font-size: 28rpx;
+  color: #666;
+  line-height: 1.8;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+/* 富文本样式 */
+.detail-body rich-text {
+  width: 100%;
+  display: block;
+}

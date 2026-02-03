@@ -1,0 +1,87 @@
+<view class="container">
+  <!-- 顶部视频区域 -->
+  <view class="video-header">
+    <!-- 背景图片 -->
+    <image src="https://zhengpan-fireworks-1392575669.cos.ap-shanghai.myqcloud.com/miniprogram/assets/images/store-bg.png" class="video-header-bg" mode="aspectFill"></image>
+    
+    <text class="video-header-title">视频</text>
+    <view class="video-wrapper">
+      <view class="video-placeholder">
+        <text>视频</text>
+      </view>
+    </view>
+    <view class="auto-play-btn">
+      <text>自动播放</text>
+    </view>
+  </view>
+
+  <!-- 往期视频标题 -->
+  <view class="section-divider">
+    <image src="/assets/images/store-divider.png" class="divider-img" mode="widthFix"></image>
+  </view>
+
+  <!-- 视频网格 -->
+  <view class="video-grid">
+    <view class="video-item" wx:for="{{videoList}}" wx:key="index">
+      <view class="video-thumb">
+        <text>视频</text>
+      </view>
+      <view class="video-info">
+        <text class="video-title">门店老板</text>
+        <text class="video-sub">MENDIANLAOBAN</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 连锁店海报 -->
+  <!-- 临时移除：图片过大(373KB)，待优化 -->
+  <!-- <view class="store-poster-section">
+    <image src="/assets/images/store-poster.png" class="store-poster-img" mode="widthFix"></image>
+  </view> -->
+
+  <!-- 标准门头 -->
+  <view class="store-section">
+    <view class="section-header">
+      <image src="/assets/images/store-title-standard.png" class="section-title-img" mode="widthFix"></image>
+    </view>
+    <view class="store-grid">
+      <view class="store-item" wx:for="{{storeImages}}" wx:key="index">
+        <image src="{{item}}" mode="aspectFill" class="store-img" bindtap="previewImage" data-url="{{item}}"></image>
+      </view>
+    </view>
+  </view>
+
+  <!-- 货架陈列 -->
+  <view class="store-section">
+    <view class="section-header">
+      <image src="/assets/images/store-title-shelf.png" class="section-title-img" mode="widthFix"></image>
+    </view>
+    <view class="store-grid">
+      <view class="store-item" wx:for="{{shelfImages}}" wx:key="index">
+        <image src="{{item}}" mode="aspectFill" class="store-img" bindtap="previewImage" data-url="{{item}}"></image>
+      </view>
+    </view>
+  </view>
+
+  <!-- 品牌周边 -->
+  <view class="store-section">
+    <view class="section-header">
+      <image src="/assets/images/store-title-brand.png" class="section-title-img" mode="widthFix"></image>
+    </view>
+    <view class="store-grid">
+      <view class="store-item" wx:for="{{brandImages}}" wx:key="index">
+        <image src="{{item}}" mode="aspectFill" class="store-img" bindtap="previewImage" data-url="{{item}}"></image>
+      </view>
+    </view>
+  </view>
+
+  <!-- 声明文字 -->
+  <view class="disclaimer">
+    <text class="disclaimer-text">该系统全部产品均为企业产品展示，仅供二维码扫码查看产品真实效果；如有人转发该页面进行在线推荐或者销售行为均属违法行为，烟花必须前往正规网点购买。请第一时间联系技术支持电话，坚决打击违法犯罪！烟花必须前往正规网点购买！</text>
+  </view>
+
+  <!-- 底部品牌 -->
+  <view class="footer-brand">
+    <image src="/assets/images/footer-logo.png" class="footer-logo-img" mode="widthFix"></image>
+  </view>
+</view>

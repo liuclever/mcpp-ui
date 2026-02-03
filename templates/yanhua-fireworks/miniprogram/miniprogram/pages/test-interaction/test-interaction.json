@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "互动按钮测试",
+  "usingComponents": {
+    "interaction-bar": "/components/interaction-bar/interaction-bar"
+  }
+}

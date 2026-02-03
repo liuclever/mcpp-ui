@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "品牌故事",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "usingComponents": {
+    "content-item-text": "/components/content-list-item-text/content-list-item-text",
+    "content-item-image-text": "/components/content-list-item-image-text/content-list-item-image-text",
+    "content-item-image-grid": "/components/content-list-item-image-grid/content-list-item-image-grid"
+  }
+}

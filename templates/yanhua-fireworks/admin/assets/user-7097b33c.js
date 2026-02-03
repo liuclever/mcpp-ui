@@ -1,0 +1,1 @@
+import{s as e}from"./request-0b13b1fd.js";function r(t){return e.get("/user/admin/list",{params:t})}function n(t){return e.get(`/user/admin/detail/${t}`)}function u(t){return e.put("/user/admin/status",t)}function i(t){return e.get("/user/admin/points",{params:t})}export{n as a,i as b,r as g,u};

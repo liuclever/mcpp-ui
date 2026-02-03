@@ -1,0 +1,9 @@
+<view class="page-banner {{position === 'top' && pageKey === 'product' ? 'banner-top' : ''}}" wx:if="{{banner && banner.imageUrl}}">
+  <image 
+    class="banner-image" 
+    src="{{banner.imageUrl}}" 
+    mode="widthFix"
+    bindtap="onBannerTap"
+    lazy-load="{{true}}"
+  />
+</view>

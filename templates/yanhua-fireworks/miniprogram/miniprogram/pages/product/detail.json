@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "nav-bar": "/components/nav-bar/nav-bar",
+    "comment-list": "/components/comment-list/comment-list",
+    "comment-input": "/components/comment-input/comment-input"
+  },
+  "navigationStyle": "custom"
+}

@@ -1,0 +1,178 @@
+/* 关于页样式 */
+.container {
+  min-height: 100vh;
+  background: #fff;
+  padding-bottom: 20rpx;
+}
+
+/* Banner */
+.banner {
+  width: 100%;
+  background: #d03a6a;
+}
+
+.banner-img {
+  width: 100%;
+  display: block;
+}
+
+/* 品牌标识 */
+.brand-badge {
+  display: flex;
+  justify-content: center;
+  padding: 30rpx;
+  background: #fff;
+  border-radius: 30rpx 30rpx 0 0;
+  margin-top: -40rpx;
+  position: relative;
+  z-index: 10;
+}
+
+.badge-logo {
+  width: 380rpx;
+  margin-bottom: 30rpx;
+}
+
+.badge-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #d03a6a;
+}
+
+.badge-slogan {
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 8rpx;
+}
+
+/* 公司信息 */
+.company-info {
+  background: #fff;
+  padding: 40rpx 30rpx;
+}
+
+.info-content {
+  display: flex;
+  align-items: flex-start;
+}
+
+.info-left {
+  margin-right: 40rpx;
+}
+
+.info-right {
+  flex: 1;
+}
+
+.company-logo {
+  width: 100rpx;
+  margin-left: 20rpx;
+}
+
+.company-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #1a4b8c;
+  margin-bottom: 16rpx;
+  display: block;
+}
+
+.info-list {
+  margin-bottom: 20rpx;
+}
+
+/* 分割线 */
+.divider-section {
+  padding: 30rpx 0;
+  display: flex;
+  justify-content: center;
+}
+
+.divider-img {
+  width: 100%;
+}
+
+.info-item {
+  display: flex;
+  margin-bottom: 16rpx;
+}
+
+.info-label {
+  color: #1a4b8c;
+  font-size: 26rpx;
+  width: 100rpx;
+  flex-shrink: 0;
+}
+
+.info-value {
+  color: #1a4b8c;
+  font-size: 26rpx;
+}
+
+/* 快捷操作 */
+.quick-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 60rpx;
+  margin-top: -10rpx;
+}
+
+.action-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #d03a6a;
+  font-size: 28rpx;
+}
+
+.action-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 10rpx;
+}
+
+/* 底部提示 */
+.footer-notice {
+  padding: 30rpx;
+  background: #fff5f7;
+  margin: 20rpx;
+  border-radius: 12rpx;
+}
+
+.footer-notice text {
+  font-size: 22rpx;
+  color: #d03a6a;
+  line-height: 1.6;
+}
+
+/* 底部品牌 */
+.footer-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  padding: 20rpx 30rpx;
+  border-top: 1rpx solid #eee;
+}
+
+.footer-logo {
+  width: 80rpx;
+  margin-right: 16rpx;
+}
+
+.footer-info {
+}
+
+.footer-title {
+  display: block;
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #d03a6a;
+  margin-bottom: 6rpx;
+}
+
+.footer-desc {
+  display: block;
+  font-size: 22rpx;
+  color: #999;
+}

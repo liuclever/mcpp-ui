@@ -1,0 +1,46 @@
+<view class="container">
+  <!-- 积分概览 -->
+  <view class="points-header">
+    <view class="current-points">
+      <text class="points-label">当前积分</text>
+      <text class="points-value">{{userPoints}}</text>
+    </view>
+  </view>
+
+  <!-- 积分记录列表 -->
+  <view class="points-list" wx:if="{{!loading && records.length > 0}}">
+    <view class="points-item" wx:for="{{records}}" wx:key="id">
+      <view class="item-left">
+        <view class="item-type {{item.points > 0 ? 'type-add' : 'type-deduct'}}">
+          {{item.points > 0 ? '+' : ''}}{{item.points}}
+        </view>
+        <view class="item-info">
+          <text class="item-reason">{{item.reason}}</text>
+          <text class="item-time">{{item.createTime}}</text>
+        </view>
+      </view>
+      <view class="item-tag" wx:if="{{item.type}}">
+        <text class="tag-text">{{getTypeText(item.type)}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 加载中 -->
+  <view class="loading" wx:if="{{loading}}">
+    <text>加载中...</text>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty" wx:if="{{!loading && records.length === 0}}">
+    <image src="/assets/images/empty.png" class="empty-img" mode="aspectFit"></image>
+    <text class="empty-text">暂无积分记录</text>
+  </view>
+
+  <!-- 加载更多 -->
+  <view class="load-more" wx:if="{{!loading && hasMore}}">
+    <text bindtap="loadMore">加载更多</text>
+  </view>
+  <view class="no-more" wx:if="{{!loading && !hasMore && records.length > 0}}">
+    <text>没有更多了</text>
+  </view>
+</view>

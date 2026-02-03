@@ -1,0 +1,73 @@
+/**
+ * 评论列表工具函数 WXS 模块
+ */
+
+/**
+ * 格式化数字显示
+ */
+function formatNumber(num) {
+  if (!num || num === 0) {
+    return '0';
+  }
+  
+  if (num >= 10000) {
+    return (num / 10000).toFixed(1) + 'w';
+  } else if (num >= 1000) {
+    return (num / 1000).toFixed(1) + 'k';
+  }
+  return num.toString();
+}
+
+/**
+ * 格式化时间显示
+ */
+function formatTime(timeStr) {
+  if (!timeStr) return '';
+  
+  var time = getDate(timeStr).getTime();
+  var now = getDate().getTime();
+  var diff = now - time;
+  
+  var minute = 60 * 1000;
+  var hour = 60 * minute;
+  var day = 24 * hour;
+  var month = 30 * day;
+  var year = 365 * day;
+  
+  if (diff < minute) {
+    return '刚刚';
+  } else if (diff < hour) {
+    return Math.floor(diff / minute) + '分钟前';
+  } else if (diff < day) {
+    return Math.floor(diff / hour) + '小时前';
+  } else if (diff < month) {
+    return Math.floor(diff / day) + '天前';
+  } else if (diff < year) {
+    return Math.floor(diff / month) + '个月前';
+  } else {
+    return Math.floor(diff / year) + '年前';
+  }
+}
+
+/**
+ * 判断评论是否已展开
+ */
+function isExpanded(expandedComments, commentId) {
+  if (!expandedComments || expandedComments.length === 0) {
+    return false;
+  }
+  
+  for (var i = 0; i < expandedComments.length; i++) {
+    if (expandedComments[i] === commentId) {
+      return true;
+    }
+  }
+  
+  return false;
+}
+
+module.exports = {
+  formatNumber: formatNumber,
+  formatTime: formatTime,
+  isExpanded: isExpanded
+};

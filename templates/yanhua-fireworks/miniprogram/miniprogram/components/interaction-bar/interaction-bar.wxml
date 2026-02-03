@@ -1,0 +1,50 @@
+<!-- components/interaction-bar/interaction-bar.wxml -->
+<view class="interaction-bar {{layout}}">
+  <!-- 点赞按钮 -->
+  <view class="interaction-item" bindtap="onLikeTap">
+    <view class="icon-wrapper {{likeAnimating ? 'animating' : ''}}">
+      <image 
+        class="icon" 
+        src="{{isLiked ? '/assets/icons/视频点赞-1.png' : '/assets/icons/视频点赞-0.png'}}"
+        mode="aspectFit"
+      />
+    </view>
+    <text class="count">{{formatNumber(likes)}}</text>
+  </view>
+
+  <!-- 收藏按钮 -->
+  <view class="interaction-item" bindtap="onCollectTap">
+    <view class="icon-wrapper {{collectAnimating ? 'animating' : ''}}">
+      <image 
+        class="icon" 
+        src="{{isCollected ? '/assets/icons/视频收藏-1.png' : '/assets/icons/视频收藏-0.png'}}"
+        mode="aspectFit"
+      />
+    </view>
+    <text class="count">{{formatNumber(collects)}}</text>
+  </view>
+
+  <!-- 评论按钮 -->
+  <view class="interaction-item" bindtap="onCommentTap">
+    <view class="icon-wrapper">
+      <image 
+        class="icon" 
+        src="/assets/icons/comment-white.png"
+        mode="aspectFit"
+      />
+    </view>
+    <text class="count">{{formatNumber(comments)}}</text>
+  </view>
+
+  <!-- 分享按钮 -->
+  <view class="interaction-item" bindtap="onShareTap">
+    <view class="icon-wrapper">
+      <image 
+        class="icon" 
+        src="/assets/icons/share-white.png"
+        mode="aspectFit"
+      />
+    </view>
+    <text class="count" wx:if="{{shares > 0}}">{{formatNumber(shares)}}</text>
+  </view>
+</view>

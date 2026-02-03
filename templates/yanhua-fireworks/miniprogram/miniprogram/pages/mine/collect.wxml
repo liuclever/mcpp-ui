@@ -1,0 +1,58 @@
+<!-- pages/mine/collect.wxml -->
+<view class="collect-container">
+  <!-- 空状态 -->
+  <view wx:if="{{videoList.length === 0 && !loading}}" class="empty-state">
+    <image class="empty-icon" src="/assets/images/empty-collect.png" mode="aspectFit" />
+    <text class="empty-text">还没有收藏任何视频</text>
+    <text class="empty-hint">快去社区看看吧~</text>
+  </view>
+
+  <!-- 视频列表 -->
+  <view wx:else class="video-list">
+    <view 
+      wx:for="{{videoList}}" 
+      wx:key="id" 
+      class="video-item"
+      bindtap="goVideoDetail"
+      data-id="{{item.id}}"
+    >
+      <!-- 视频封面 -->
+      <view class="video-cover">
+        <image class="cover-image" src="{{item.coverUrl}}" mode="aspectFill" />
+        <view class="video-duration">{{item.duration || '00:00'}}</view>
+        <view class="video-status">
+          <image class="status-icon" src="/assets/images/icon-play.png" mode="aspectFit" />
+          <text class="status-text">{{item.views || 0}}</text>
+        </view>
+      </view>
+
+      <!-- 视频信息 -->
+      <view class="video-info">
+        <text class="video-title">{{item.title}}</text>
+        <view class="video-meta">
+          <text class="meta-item">{{item.createTime}}</text>
+          <view class="meta-stats">
+            <text class="stat-item">
+              <image class="stat-icon" src="/assets/images/icon-like-filled.png" mode="aspectFit" />
+              {{item.likes || 0}}
+            </text>
+            <text class="stat-item">
+              <image class="stat-icon" src="/assets/images/icon-comment.png" mode="aspectFit" />
+              {{item.comments || 0}}
+            </text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 加载提示 -->
+  <view wx:if="{{loading}}" class="loading-more">
+    <text>加载中...</text>
+  </view>
+
+  <!-- 没有更多 -->
+  <view wx:if="{{!hasMore && videoList.length > 0}}" class="no-more">
+    <text>没有更多了</text>
+  </view>
+</view>

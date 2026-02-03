@@ -1,0 +1,295 @@
+/* 专卖连锁页样式 */
+.container {
+  min-height: 100vh;
+  background: #ffffff;
+  padding-bottom: 120rpx;
+}
+
+/* 视频头部区域 */
+.video-header {
+  position: relative;
+  padding: 10rpx 30rpx 80rpx;
+  overflow: hidden;
+}
+
+.video-header-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 68%;
+  z-index: 0;
+}
+
+.video-header-title {
+  display: block;
+  text-align: center;
+  color: #ffffff;
+  font-size: 32rpx;
+  font-weight: 500;
+  letter-spacing: 4rpx;
+  margin-top: 10rpx;
+  margin-bottom: 30rpx;
+  position: relative;
+  z-index: 1;
+}
+
+.video-wrapper {
+  position: relative;
+  z-index: 1;
+  margin-top: 120rpx;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 20rpx;
+  padding: 16rpx;
+}
+
+.video-placeholder {
+  width: 100%;
+  height: 320rpx;
+  background: #b0b0c0;
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-size: 32rpx;
+}
+
+.auto-play-btn {
+  position: relative;
+  z-index: 1;
+  width: 220rpx;
+  margin: 30rpx auto 0;
+  background: #d03a6a;
+  color: #ffffff;
+  text-align: center;
+  padding: 18rpx 0;
+  border-radius: 50rpx;
+  font-size: 28rpx;
+}
+
+/* 连锁店海报 */
+.store-poster-section {
+  width: 100%;
+  background: #d03a6a;
+}
+
+.store-poster-img {
+  width: 100%;
+}
+
+/* 分隔标题 */
+.section-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30rpx 40rpx;
+  background: #ffffff;
+}
+
+.divider-img {
+  width: 100%;
+  max-width: 650rpx;
+}
+
+/* 视频网格 */
+.video-grid {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20rpx 10rpx;
+  background: #ffffff;
+  justify-content: space-between;
+}
+
+.video-item {
+  width: calc(50% - 10rpx);
+  margin-bottom: 20rpx;
+}
+
+.video-thumb {
+  width: 100%;
+  height: 240rpx;
+  background: #a0a0b0;
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-size: 28rpx;
+}
+
+.video-info {
+  padding: 16rpx 0;
+}
+
+.video-title {
+  display: block;
+  font-size: 28rpx;
+  color: #333;
+  font-weight: bold;
+}
+
+.video-sub {
+  font-size: 20rpx;
+  color: #999;
+  letter-spacing: 2rpx;
+}
+
+.intro-banner {
+  width: 100%;
+  height: 300rpx;
+}
+
+.banner-img {
+  width: 100%;
+  height: 100%;
+}
+
+.brand-intro {
+  padding: 30rpx;
+}
+
+.brand-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.brand-logo {
+  width: 80rpx;
+  height: 80rpx;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  margin-left: 16rpx;
+}
+
+.brand-year {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #d03a6a;
+}
+
+.brand-slogan {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.brand-desc {
+  text-align: center;
+  padding: 20rpx 0;
+}
+
+.desc-title {
+  display: block;
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #d03a6a;
+  margin-bottom: 12rpx;
+}
+
+.desc-content {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.brand-claim {
+  text-align: center;
+  padding: 30rpx 0;
+}
+
+.claim-img {
+  width: 300rpx;
+  margin-bottom: 16rpx;
+}
+
+.claim-text {
+  display: block;
+  font-size: 28rpx;
+  color: #d03a6a;
+}
+
+.brand-promise {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30rpx;
+  background: #fff5f7;
+  border-radius: 16rpx;
+  font-size: 26rpx;
+  color: #666;
+  line-height: 2;
+}
+
+.promise-highlight {
+  color: #d03a6a;
+  font-weight: bold;
+}
+
+/* 门头展示 */
+.store-section {
+  background: #d03a6a;
+  margin-top: 0;
+  padding: 30rpx;
+}
+
+.section-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30rpx;
+}
+
+.section-title-img {
+  width: 300rpx;
+}
+
+.store-grid {
+  display: flex;
+  flex-direction: column;
+}
+
+.store-item {
+  width: 100%;
+  height: 300rpx;
+  background: #f5f5f5;
+  border-radius: 12rpx;
+  overflow: hidden;
+  margin-bottom: 20rpx;
+}
+
+.store-img {
+  width: 100%;
+  height: 100%;
+}
+
+/* 声明文字 */
+.disclaimer {
+  margin: 20rpx auto;
+  padding: 30rpx;
+  border-radius: 16rpx;
+  width: fit-content;
+  max-width: 88%;
+}
+
+.disclaimer-text {
+  display: block;
+  color: #d7809f;
+  font-size: 24rpx;
+  line-height: 1.8;
+  text-align: center;
+}
+
+/* 底部品牌 */
+.footer-brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30rpx 40rpx 40rpx;
+  background: #fff;
+}
+
+.footer-logo-img {
+  width: 500rpx;
+}

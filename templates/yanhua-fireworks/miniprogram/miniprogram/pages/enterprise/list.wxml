@@ -1,0 +1,94 @@
+<!--企业中心内容列表页-->
+<view class="list-page">
+  <!-- 加载状态 -->
+  <view wx:if="{{loading && contentList.length === 0}}" class="loading-container">
+    <view class="loading-text">加载中...</view>
+  </view>
+
+  <!-- 错误状态 -->
+  <view wx:elif="{{error && contentList.length === 0}}" class="error-container">
+    <view class="error-text">{{error}}</view>
+    <button class="retry-button" bindtap="onRetry">重试</button>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:elif="{{!loading && contentList.length === 0}}" class="empty-container">
+    <view class="empty-text">暂无内容</view>
+  </view>
+
+  <!-- 内容列表 -->
+  <view wx:else class="content-list">
+    <!-- 文字标题形式 -->
+    <block wx:if="{{displayMode === 'text'}}">
+      <view 
+        class="list-item" 
+        wx:for="{{contentList}}" 
+        wx:key="id"
+        bindtap="onItemTap"
+        data-id="{{item.id}}"
+      >
+        <view class="list-title">{{item.title}}</view>
+        <view class="list-summary">{{item.summary}}</view>
+        <view class="list-meta">
+          <text class="list-views">👁 {{item.viewCount || 0}} 人阅读</text>
+          <text class="list-time">{{item.publishTime || item.createTime}}</text>
+        </view>
+      </view>
+    </block>
+
+    <!-- 图文形式 (默认) - 上标题下图片 -->
+    <block wx:elif="{{displayMode === 'image-text' || !displayMode}}">
+      <view 
+        class="article-item" 
+        wx:for="{{contentList}}" 
+        wx:key="id"
+        bindtap="onItemTap"
+        data-id="{{item.id}}"
+      >
+        <view class="article-title">{{item.title}}</view>
+        <!-- 只有当有图片时才展示图片区域 -->
+        <view class="article-images" wx:if="{{item.images && item.images.length > 0}}">
+          <image 
+            wx:for="{{item.images}}" 
+            wx:for-item="img" 
+            wx:for-index="imgIndex"
+            wx:key="imgIndex"
+            wx:if="{{imgIndex < 3}}"
+            class="article-image {{item.images.length === 1 ? 'single' : (item.images.length === 2 ? 'double' : 'triple')}}" 
+            src="{{img}}" 
+            mode="aspectFill"
+          ></image>
+        </view>
+        <view class="article-meta">
+          <text class="article-views">👁 {{item.viewCount || 0}} 人阅读</text>
+        </view>
+      </view>
+    </block>
+
+    <!-- 图片列表形式 - 双列展示 -->
+    <block wx:elif="{{displayMode === 'image-grid'}}">
+      <view class="image-grid-list">
+        <view 
+          class="image-grid-item" 
+          wx:for="{{contentList}}" 
+          wx:key="id"
+          bindtap="onItemTap"
+          data-id="{{item.id}}"
+        >
+          <image class="grid-image" src="{{item.coverImage}}" mode="aspectFill"></image>
+          <view class="grid-title">{{item.title}}</view>
+          <view class="grid-meta">
+            <text class="grid-views">👁 {{item.viewCount || 0}} 人阅读</text>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <!-- 加载更多提示 -->
+    <view class="load-more-container">
+      <view wx:if="{{loadingMore}}" class="loading-more">加载更多...</view>
+      <view wx:elif="{{hasMore}}" class="load-more-tip">上拉加载更多</view>
+      <view wx:else class="no-more">没有更多了</view>
+    </view>
+  </view>
+</view>

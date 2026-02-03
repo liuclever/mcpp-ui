@@ -1,0 +1,17 @@
+<!--图文形式内容列表项-->
+<view class="content-item-image-text" bindtap="onTap" wx:if="{{item}}">
+  <image 
+    class="item-cover" 
+    src="{{item.coverImage}}" 
+    mode="aspectFill" 
+    lazy-load="{{true}}"
+  />
+  <view class="item-content">
+    <view class="item-title">{{item.title}}</view>
+    <view class="item-summary" wx:if="{{item.summary}}">{{item.summary}}</view>
+    <view class="item-meta">
+      <text class="item-time">{{item.publishTime}}</text>
+      <text class="item-views" wx:if="{{item.viewCount}}">{{item.viewCount}}次浏览</text>
+    </view>
+  </view>
+</view>

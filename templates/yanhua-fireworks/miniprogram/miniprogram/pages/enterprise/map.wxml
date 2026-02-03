@@ -1,0 +1,66 @@
+<view class="map-page">
+  <!-- 地图 -->
+  <map
+    id="salesMap"
+    class="sales-map"
+    latitude="{{centerLat}}"
+    longitude="{{centerLng}}"
+    markers="{{markers}}"
+    show-location="{{true}}"
+    bindmarkertap="onMarkerTap"
+  />
+
+  <!-- 网点列表抽屉 -->
+  <view class="points-drawer" style="height: {{drawerHeight}}px">
+    <!-- 抽屉把手 -->
+    <view 
+      class="drawer-handle" 
+      bindtouchstart="onDrawerTouchStart" 
+      bindtouchmove="onDrawerTouchMove"
+      bindtouchend="onDrawerTouchEnd"
+    >
+      <view class="handle-bar"></view>
+    </view>
+
+    <!-- 网点列表 -->
+    <scroll-view class="points-list" scroll-y="{{true}}">
+      <view 
+        class="point-item" 
+        wx:for="{{salesPoints}}" 
+        wx:key="id"
+        bindtap="onPointTap"
+        data-point="{{item}}"
+      >
+        <view class="point-name">{{item.name}}</view>
+        <view class="point-address">{{item.address}}</view>
+        <view class="point-meta">
+          <text class="point-phone">{{item.phone}}</text>
+          <text class="point-distance" wx:if="{{item.distance}}">{{item.distance}}km</text>
+        </view>
+        <view class="point-actions">
+          <button 
+            class="action-button" 
+            bindtap="callPhone" 
+            data-phone="{{item.phone}}"
+            catchtap="stopPropagation"
+          >
+            拨打电话
+          </button>
+          <button 
+            class="action-button primary" 
+            bindtap="openNavigation" 
+            data-point="{{item}}"
+            catchtap="stopPropagation"
+          >
+            导航
+          </button>
+        </view>
+      </view>
+
+      <!-- 空状态 -->
+      <view class="empty-state" wx:if="{{salesPoints.length === 0}}">
+        <text class="empty-text">暂无销售网点</text>
+      </view>
+    </scroll-view>
+  </view>
+</view>

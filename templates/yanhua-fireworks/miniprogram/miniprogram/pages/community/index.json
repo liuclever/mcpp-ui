@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "社区",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "usingComponents": {
+    "video-card": "/components/video-card/video-card",
+    "page-banner": "/components/page-banner/page-banner"
+  }
+}

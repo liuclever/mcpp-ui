@@ -1,0 +1,1 @@
+import{s as t}from"./request-0b13b1fd.js";function o(){return t({url:"/about-us/content",method:"get"})}function e(n){return t({url:"/admin/about-us/content",method:"put",data:{content:n}})}const a={getContent:o,updateContent:e};export{a};

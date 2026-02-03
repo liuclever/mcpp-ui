@@ -1,0 +1,84 @@
+<view class="container">
+  <!-- 顶部导航栏 -->
+  <nav-bar title="注册" showBack="{{true}}"></nav-bar>
+
+  <!-- Tab切换（Pill） -->
+  <view class="tab-wrap">
+    <view class="tab-pill">
+      <view class="tab-item {{currentTab === 'login' ? 'active' : ''}}" bindtap="switchTab" data-tab="login">登录</view>
+      <view class="tab-item {{currentTab === 'register' ? 'active' : ''}}" bindtap="switchTab" data-tab="register">注册</view>
+    </view>
+  </view>
+
+  <!-- 注册表单 -->
+  <view class="form-card">
+    <text class="form-title">注册</text>
+    
+    <view class="form-item {{phoneError ? 'error' : ''}}">
+      <input type="number" placeholder="在这里输入您的手机号" placeholder-style="color:#e6afc0;" value="{{phone}}" bindinput="onPhoneInput" maxlength="11" />
+      <image src="/assets/icons/phone-pink.png" class="input-icon"></image>
+    </view>
+    <view class="error-tip" wx:if="{{phoneError}}">{{phoneError}}</view>
+    
+    <view class="form-item {{passwordError ? 'error' : ''}}">
+      <input type="password" placeholder="在这里输入您的密码" placeholder-style="color:#e6afc0;" value="{{password}}" bindinput="onPasswordInput" />
+      <image src="/assets/icons/lock-pink.png" class="input-icon"></image>
+    </view>
+    <view class="error-tip" wx:if="{{passwordError}}">{{passwordError}}</view>
+    <view class="password-strength" wx:if="{{showPasswordStrength}}">
+      <text class="strength-label">密码强度：</text>
+      <view class="strength-bar">
+        <view class="strength-item {{passwordStrength === 'weak' || passwordStrength === 'medium' || passwordStrength === 'strong' ? 'active weak' : ''}}"></view>
+        <view class="strength-item {{passwordStrength === 'medium' || passwordStrength === 'strong' ? 'active medium' : ''}}"></view>
+        <view class="strength-item {{passwordStrength === 'strong' ? 'active strong' : ''}}"></view>
+      </view>
+      <text class="strength-text {{passwordStrength}}">
+        {{passwordStrength === 'weak' ? '弱' : passwordStrength === 'medium' ? '中' : '强'}}
+      </text>
+    </view>
+
+    <view class="form-item {{confirmPasswordError ? 'error' : ''}}">
+      <input type="password" placeholder="请再次确认一遍密码" placeholder-style="color:#e6afc0;" value="{{confirmPassword}}" bindinput="onConfirmPasswordInput" />
+      <image src="/assets/icons/warning-pink.png" class="input-icon"></image>
+    </view>
+    <view class="error-tip" wx:if="{{confirmPasswordError}}">{{confirmPasswordError}}</view>
+
+    <view class="form-item code-item {{codeError ? 'error' : ''}}">
+      <input type="number" placeholder="输入验证码" value="{{code}}" bindinput="onCodeInput" maxlength="6" />
+      <view class="code-btn {{countdown > 0 ? 'disabled' : ''}}" bindtap="sendCode">
+        {{countdown > 0 ? countdown + 's' : '发送验证码'}}
+      </view>
+    </view>
+    <view class="error-tip" wx:if="{{codeError}}">{{codeError}}</view>
+  </view>
+
+  <!-- 注册按钮 -->
+  <view class="register-btn-wrap">
+    <view class="register-btn {{isRegistering ? 'disabled' : ''}}" bindtap="doRegister">
+      {{isRegistering ? '注册中...' : '注册'}}
+    </view>
+  </view>
+
+  <!-- 其他登录方式 -->
+  <view class="divider-section">
+    <text class="divider-text">——— 其他登录方式 ———</text>
+    <view class="social-row">
+      <view class="social-button" bindtap="wechatLogin">
+        <image src="/assets/icons/wechat-circle.png" class="social-icon-img"></image>
+      </view>
+      <view class="social-button" bindtap="phoneLogin">
+        <image src="/assets/icons/scan-circle.png" class="social-icon-img"></image>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部提示 -->
+  <view class="footer-notice">
+    <text>该系统全部产品均为企业产品展示，仅供二维码扫码查看产品真实效果；如有人转发该页面进行在线推荐或者销售行为均属违法行为，烟花必须前往正规网点购买。请第一时间联系技术支持电话，坚决打击违法犯罪！烟花必须前往正规网点购买！</text>
+  </view>
+
+  <!-- 底部品牌 -->
+  <view class="footer-brand">
+    <image src="/assets/images/footer-brand-logo.png" class="footer-brand-img" mode="widthFix"></image>
+  </view>
+</view>

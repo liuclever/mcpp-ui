@@ -1,0 +1,141 @@
+<!--pages/community/upload.wxml-->
+<view class="upload-page">
+  <!-- 顶部导航栏（包含状态栏padding） -->
+  <view class="nav-bar" style="padding-top: {{statusBarHeight}}px;">
+    <view class="nav-back" bindtap="cancel">
+      <text class="back-icon">←</text>
+    </view>
+    <view class="nav-title">上传视频</view>
+    <view class="nav-placeholder"></view>
+  </view>
+
+  <scroll-view class="content" scroll-y>
+    <!-- 视频导入区域 -->
+    <view class="video-import-section">
+      <view class="video-preview" wx:if="{{videoPath}}">
+        <video 
+          class="preview-video"
+          src="{{videoPath}}"
+          poster="{{coverPath}}"
+          controls
+          show-center-play-btn
+        />
+        <view class="reselect-btn" bindtap="chooseVideo">重新选择</view>
+      </view>
+      
+      <view class="video-import-box" wx:else bindtap="chooseVideo">
+        <view class="import-icon">+</view>
+        <text class="import-text">点击导入视频</text>
+        <text class="import-tip">支持60秒以内，300MB以下</text>
+      </view>
+    </view>
+
+    <!-- 表单区域 -->
+    <view class="form-container">
+      <!-- 视频标题 -->
+      <view class="form-group">
+        <view class="form-label">
+          <text>视频标题</text>
+          <text class="required">*</text>
+        </view>
+        <input 
+          class="form-input"
+          placeholder="请输入视频标题"
+          value="{{title}}"
+          maxlength="50"
+          bindinput="onTitleInput"
+        />
+      </view>
+
+      <!-- 相关产品 -->
+      <view class="form-group">
+        <view class="form-label">相关产品</view>
+        <view class="picker-input" bindtap="showProductPicker">
+          <text class="{{productIndex >= 0 ? 'selected' : 'placeholder'}}">
+            {{productIndex >= 0 ? productList[productIndex].name : '请选择相关产品'}}
+          </text>
+          <text class="arrow">›</text>
+        </view>
+      </view>
+
+      <!-- 自定义产品选择器弹窗 -->
+      <view class="custom-picker-mask" wx:if="{{showPicker}}" bindtap="hideProductPicker">
+        <view class="custom-picker-content" catchtap="stopPropagation">
+          <view class="picker-header">
+            <text class="picker-cancel" bindtap="hideProductPicker">取消</text>
+            <text class="picker-title">选择产品</text>
+            <text class="picker-confirm" bindtap="confirmProduct">确定</text>
+          </view>
+          <scroll-view class="picker-list" scroll-y>
+            <view 
+              class="picker-item {{tempProductIndex === index ? 'active' : ''}}"
+              wx:for="{{productList}}"
+              wx:key="id"
+              bindtap="selectProduct"
+              data-index="{{index}}"
+            >
+              {{item.name}}
+            </view>
+          </scroll-view>
+        </view>
+      </view>
+
+      <!-- 地理位置 -->
+      <view class="form-group">
+        <view class="form-label">地理位置</view>
+        <view class="picker-input" bindtap="chooseLocation">
+          <text class="{{location ? 'selected' : 'placeholder'}}">
+            {{location || '请选择地理位置（选填）'}}
+          </text>
+          <text class="arrow">›</text>
+        </view>
+      </view>
+
+      <!-- 活动话题 -->
+      <view class="form-group">
+        <view class="form-label">活动话题</view>
+        <view class="topic-tags">
+          <view 
+            class="topic-tag {{item.selected ? 'selected' : ''}}"
+            wx:for="{{topicList}}"
+            wx:key="id"
+            bindtap="toggleTopic"
+            data-index="{{index}}"
+          >
+            {{item.name}}
+          </view>
+        </view>
+      </view>
+
+      <!-- 视频描述 -->
+      <view class="form-group">
+        <view class="form-label">视频描述</view>
+        <textarea 
+          class="form-textarea"
+          placeholder="请输入视频描述（选填）"
+          value="{{description}}"
+          maxlength="200"
+          bindinput="onDescInput"
+          auto-height
+        />
+        <view class="char-count">{{description.length}}/200</view>
+      </view>
+    </view>
+
+    <!-- 上传进度 -->
+    <view class="progress-section" wx:if="{{uploading}}">
+      <view class="progress-bar">
+        <view class="progress-fill" style="width: {{uploadProgress}}%"></view>
+      </view>
+      <text class="progress-text">上传中 {{uploadProgress}}%</text>
+    </view>
+  </scroll-view>
+
+  <!-- 底部操作栏 -->
+  <view class="bottom-bar">
+    <view class="preview-btn" bindtap="previewVideo">预览</view>
+    <view class="submit-btn {{uploading || !videoPath || !title ? 'disabled' : ''}}" bindtap="publishVideo">
+      {{uploading ? '上传中...' : '确认上传'}}
+    </view>
+  </view>
+</view>

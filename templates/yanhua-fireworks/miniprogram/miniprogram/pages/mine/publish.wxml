@@ -1,0 +1,80 @@
+<!--pages/mine/publish.wxml-->
+<view class="publish-page">
+  <!-- 视频列表 -->
+  <view class="video-list" wx:if="{{!isEmpty}}">
+    <view 
+      class="video-item" 
+      wx:for="{{videos}}" 
+      wx:key="id"
+    >
+      <view class="video-content" bindtap="onVideoTap" data-id="{{item.id}}">
+        <view class="video-cover">
+          <image class="cover-image" src="{{item.coverUrl}}" mode="aspectFill" />
+          <view class="play-icon"></view>
+        </view>
+        
+        <view class="video-info">
+          <text class="video-title">{{item.title}}</text>
+          <text class="video-desc" wx:if="{{item.description}}">{{item.description}}</text>
+          
+          <view class="video-meta">
+            <view class="meta-item">
+              <image class="meta-icon" src="/assets/icons/视频播放-0.png" mode="aspectFit" />
+              <text>{{item.views || 0}}</text>
+            </view>
+            <view class="meta-item">
+              <image class="meta-icon" src="/assets/icons/视频点赞-0.png" mode="aspectFit" />
+              <text>{{item.likes || 0}}</text>
+            </view>
+            <view class="meta-item">
+              <image class="meta-icon" src="/assets/icons/视频评论-0.png" mode="aspectFit" />
+              <text>{{item.comments || 0}}</text>
+            </view>
+          </view>
+          
+          <text class="video-time">{{item.createTime}}</text>
+          
+          <view class="video-status">
+            <view class="status-badge {{item.status === 0 ? 'status-pending' : item.status === 1 ? 'status-approved' : 'status-rejected'}}">
+              {{item.status === 0 ? '待审核' : item.status === 1 ? '已通过' : '未通过'}}
+            </view>
+            <view 
+              class="delete-btn" 
+              catchtap="onDeleteVideo" 
+              data-id="{{item.id}}"
+              data-index="{{index}}"
+            >
+              删除
+            </view>
+          </view>
+        </view>
+      </view>
+      
+      <!-- 拒绝原因 -->
+      <view class="reject-reason" wx:if="{{item.status === 2 && item.rejectReason}}">
+        <view class="reject-label">拒绝原因：</view>
+        <text class="reject-text">{{item.rejectReason}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{isEmpty && !loading}}">
+    <image class="empty-icon" src="/assets/icons/video-btn.png" mode="aspectFit" />
+    <text class="empty-text">还没有发布视频</text>
+    <view class="empty-btn" bindtap="goPublish">
+      <text>发布第一个视频</text>
+    </view>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-state" wx:if="{{loading && videos.length === 0}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <!-- 没有更多 -->
+  <view class="no-more" wx:if="{{!hasMore && videos.length > 0 && !loading}}">
+    <text>没有更多了</text>
+  </view>
+</view>

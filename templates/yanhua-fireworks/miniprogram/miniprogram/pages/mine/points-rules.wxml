@@ -1,0 +1,28 @@
+<!-- pages/mine/points-rules.wxml -->
+<view class="points-rules-page">
+  <!-- 页面标题 -->
+  <view class="page-header">
+    <text class="page-title">积分成长规则</text>
+  </view>
+
+  <!-- 加载状态 -->
+  <view wx:if="{{loading}}" class="loading-state">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <!-- 错误状态 -->
+  <view wx:elif="{{error}}" class="error-state">
+    <image class="error-icon" src="/assets/images/error.png" mode="aspectFit" />
+    <text class="error-text">加载失败</text>
+    <button class="retry-button" bindtap="retryLoad">重试</button>
+  </view>
+
+  <!-- 规则内容 -->
+  <view wx:else class="rules-content">
+    <!-- 使用rich-text组件渲染HTML内容 -->
+    <!-- 需求：4.4 - 小程序应显示带有适当格式的规则内容 -->
+    <!-- 需求：4.5 - 当规则内容包含Markdown或HTML时，小程序应正确渲染 -->
+    <rich-text nodes="{{htmlContent}}" class="rich-text-content"></rich-text>
+  </view>
+</view>

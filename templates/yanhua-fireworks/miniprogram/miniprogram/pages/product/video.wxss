@@ -1,0 +1,212 @@
+/* 视频播放页样式 */
+.container {
+  min-height: 100vh;
+  background: #000;
+  position: relative;
+}
+
+/* 顶部 */
+.top-bar {
+  position: fixed;
+  top: calc(200rpx + env(safe-area-inset-top));
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  padding: 20rpx 30rpx;
+  background: transparent;
+  z-index: 10001;
+}
+
+.top-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 60rpx;
+}
+
+.top-row {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.top-left {
+  position: absolute;
+  left: -30rpx;
+  width: 40rpx;
+  height: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-arrow {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.tab-btn {
+  background: #6366f1;
+  color: #fff;
+  padding: 12rpx 30rpx;
+  border-radius: 24rpx;
+  font-size: 26rpx;
+}
+
+.duration-tip {
+  color: #9ca3af;
+  font-size: 24rpx;
+  margin-left: 10rpx;
+}
+
+/* 视频播放器 */
+.video-wrapper {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.video-player {
+  width: 100%;
+  height: 100%;
+}
+
+.play-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120rpx;
+  height: 120rpx;
+  background: rgba(255,255,255,0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-big-icon {
+  width: 60rpx;
+  height: 60rpx;
+}
+
+/* 右侧操作栏 */
+.side-actions {
+  position: absolute;
+  right: 20rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 40rpx;
+  z-index: 10;
+}
+
+.side-actions .action-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+  font-size: 22rpx;
+}
+
+.side-actions .action-icon {
+  width: 80rpx;
+  height: 80rpx;
+  margin-bottom: 8rpx;
+}
+
+/* 底部产品信息 */
+.bottom-info {
+  position: absolute;
+  bottom: 160rpx;
+  left: 30rpx;
+  color: #fff;
+  z-index: 10;
+}
+
+.product-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+}
+
+.product-name-en {
+  font-size: 22rpx;
+  color: #9ca3af;
+  margin-bottom: 12rpx;
+}
+
+.product-specs {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.product-specs text {
+  font-size: 24rpx;
+  color: #d1d5db;
+}
+
+/* 进度条 */
+.progress-bar {
+  position: absolute;
+  bottom: 60rpx;
+  left: 30rpx;
+  right: 30rpx;
+  z-index: 10;
+}
+
+.time-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8rpx;
+}
+
+.time-info text {
+  color: #9ca3af;
+  font-size: 22rpx;
+}
+
+/* 倍速弹窗 */
+.speed-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.speed-list {
+  background: #fff;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.speed-item {
+  padding: 30rpx 80rpx;
+  text-align: center;
+  font-size: 30rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.speed-item:last-child {
+  border-bottom: none;
+}
+
+.speed-item.active {
+  color: #d03a6a;
+  font-weight: bold;
+}

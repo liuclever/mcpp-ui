@@ -1,0 +1,392 @@
+/* 用户管理页样式 */
+.container {
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+/* 顶部品牌大图区域 */
+.brand-header {
+  position: relative;
+  width: 100%;
+}
+
+.brand-bg {
+  width: 100%;
+  display: block;
+}
+
+/* 底部用户卡片 - 悬浮在品牌图底部 */
+.user-card {
+  position: absolute;
+  bottom: -70rpx;
+  left: 30rpx;
+  right: 30rpx;
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 20rpx;
+  padding: 40rpx 30rpx;
+  min-height: 140rpx;
+  z-index: 10;
+}
+
+.user-avatar {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  border: 4rpx solid rgba(255, 255, 255, 0.3);
+  flex-shrink: 0;
+}
+
+.user-info {
+  flex: 1;
+  margin-left: 24rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  font-size: 32rpx;
+  color: #fff;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+}
+
+.user-account {
+  font-size: 24rpx;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2rpx solid #d03a6a;
+  padding: 16rpx 28rpx;
+  border-radius: 30rpx;
+}
+
+.logout-text {
+  font-size: 26rpx;
+  color: #d03a6a;
+}
+
+/* 顶部导航栏 */
+.nav-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 60rpx 30rpx 30rpx;
+  background: linear-gradient(135deg, #d03a6a 0%, #e91e63 100%);
+}
+
+.nav-back {
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-icon {
+  font-size: 36rpx;
+  color: #fff;
+  font-weight: bold;
+}
+
+.nav-title {
+  font-size: 36rpx;
+  color: #fff;
+  font-weight: bold;
+}
+
+.nav-placeholder {
+  width: 60rpx;
+}
+
+/* 用户资料区域 */
+.profile-section {
+  background: #fff;
+  margin: 0;
+  margin-top: 100rpx; /* 为黑色用户卡片留出空间 */
+  position: relative;
+  padding-top: 80rpx; /* 为编辑按钮留出空间 */
+}
+
+/* 编辑按钮容器 */
+.edit-button-container {
+  position: absolute;
+  top: 20rpx;
+  right: 30rpx;
+  z-index: 5;
+}
+
+.edit-button {
+  background: transparent;
+  color: #d03a6a;
+  font-size: 28rpx;
+  border: 2rpx solid #d03a6a;
+  border-radius: 30rpx;
+  padding: 12rpx 32rpx;
+  line-height: 1;
+}
+
+.edit-button::after {
+  border: none;
+}
+
+.profile-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.profile-item:first-child {
+  margin-top: 0; /* 移除额外的margin */
+}
+
+.profile-item:last-child {
+  border-bottom: none;
+}
+
+.profile-label {
+  font-size: 30rpx;
+  color: #333;
+  flex-shrink: 0;
+}
+
+.profile-content {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.profile-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: 16rpx;
+}
+
+.profile-item.clickable {
+  cursor: pointer;
+}
+
+.profile-item.clickable:active {
+  background: #f5f5f5;
+}
+
+.profile-preview {
+  display: flex;
+  align-items: center;
+  margin-right: 16rpx;
+}
+
+.profile-avatar-small {
+  width: 60rpx;
+  height: 60rpx;
+  border-radius: 50%;
+  margin-right: 16rpx;
+}
+
+.profile-nickname {
+  font-size: 28rpx;
+  color: #666;
+  max-width: 300rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.points-value {
+  color: #d03a6a;
+  font-weight: 500;
+}
+
+.profile-arrow {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.profile-input {
+  text-align: right;
+  font-size: 28rpx;
+  color: #666;
+  flex: 1;
+}
+
+.profile-text {
+  font-size: 28rpx;
+  color: #999;
+}
+
+.profile-text.placeholder {
+  color: #c0c0c0;
+}
+
+.profile-picker {
+  display: flex;
+  align-items: center;
+}
+
+/* 未登录状态 */
+.login-section {
+  padding: 60rpx 30rpx;
+  background: #fff;
+}
+
+.login-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60rpx;
+}
+
+.login-avatar {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  margin-bottom: 30rpx;
+  background: #f0f0f0;
+}
+
+.login-text {
+  font-size: 32rpx;
+  color: #d03a6a;
+  font-weight: bold;
+}
+
+/* 功能菜单 */
+.function-menu {
+  background: #fff;
+  margin-top: 20rpx;
+}
+
+.menu-section-title {
+  padding: 24rpx 30rpx 12rpx;
+  font-size: 26rpx;
+  color: #999;
+  font-weight: bold;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 36rpx 30rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-item-with-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 36rpx 30rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.menu-left {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.menu-label {
+  font-size: 30rpx;
+  color: #333;
+  margin-bottom: 8rpx;
+}
+
+.menu-value {
+  display: flex;
+  align-items: center;
+}
+
+.bound-text {
+  font-size: 24rpx;
+  color: #52c41a;
+}
+
+.unbind-button {
+  font-size: 26rpx;
+  color: #ff4d4f;
+  padding: 8rpx 20rpx;
+  border: 1rpx solid #ff4d4f;
+  border-radius: 20rpx;
+}
+
+.menu-arrow {
+  font-size: 28rpx;
+  color: #999;
+}
+
+/* 保存按钮 */
+.save-button-container {
+  padding: 60rpx 30rpx;
+}
+
+.save-button {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: #fff;
+  font-size: 32rpx;
+  border-radius: 50rpx;
+  padding: 28rpx 0;
+  border: none;
+}
+
+.save-button::after {
+  border: none;
+}
+
+/* 底部提示 */
+.footer-notice {
+  padding: 30rpx;
+  background: #fff5f7;
+  margin: 30rpx;
+  border-radius: 12rpx;
+}
+
+.footer-notice text {
+  font-size: 22rpx;
+  color: #d03a6a;
+  line-height: 1.6;
+}
+
+/* 底部品牌 */
+.footer-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20rpx 30rpx;
+  background: #fff;
+  border-top: 1rpx solid #eee;
+}
+
+.footer-logo {
+  width: 80rpx;
+  margin-right: 16rpx;
+}
+
+.footer-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-title {
+  font-size: 28rpx;
+  color: #d03a6a;
+  font-weight: bold;
+}
+
+.footer-desc {
+  font-size: 22rpx;
+  color: #999;
+  margin-top: 4rpx;
+}

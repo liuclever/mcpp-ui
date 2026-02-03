@@ -1,0 +1,100 @@
+<view class="form-page">
+  <view class="form-container">
+    <view class="form-header">
+      <text class="form-title">招商加盟申请</text>
+      <text class="form-subtitle">请填写以下信息，我们会尽快与您联系</text>
+    </view>
+
+    <form bindsubmit="onSubmit">
+      <!-- 姓名 -->
+      <view class="form-item">
+        <view class="form-label">
+          <text class="label-text">姓名</text>
+          <text class="required">*</text>
+        </view>
+        <input 
+          class="form-input" 
+          name="name" 
+          value="{{formData.name}}"
+          placeholder="请输入您的姓名" 
+          bindinput="onNameInput"
+        />
+      </view>
+
+      <!-- 手机号 -->
+      <view class="form-item">
+        <view class="form-label">
+          <text class="label-text">手机号</text>
+          <text class="required">*</text>
+        </view>
+        <input 
+          class="form-input" 
+          name="phone" 
+          type="number"
+          value="{{formData.phone}}"
+          placeholder="请输入手机号" 
+          maxlength="11"
+          bindinput="onPhoneInput"
+        />
+      </view>
+
+      <!-- 所在地区 -->
+      <view class="form-item">
+        <view class="form-label">
+          <text class="label-text">所在地区</text>
+          <text class="required">*</text>
+        </view>
+        <picker 
+          mode="region" 
+          value="{{regionArray}}"
+          bindchange="onRegionChange"
+        >
+          <view class="form-picker {{regionText ? '' : 'placeholder'}}">
+            {{regionText || '请选择所在地区'}}
+          </view>
+        </picker>
+      </view>
+
+      <!-- 投资预算 -->
+      <view class="form-item">
+        <view class="form-label">
+          <text class="label-text">投资预算</text>
+        </view>
+        <picker 
+          range="{{budgetOptions}}" 
+          value="{{budgetIndex}}"
+          bindchange="onBudgetChange"
+        >
+          <view class="form-picker {{budgetIndex >= 0 ? '' : 'placeholder'}}">
+            {{budgetIndex >= 0 ? budgetOptions[budgetIndex] : '请选择投资预算'}}
+          </view>
+        </picker>
+      </view>
+
+      <!-- 留言内容 -->
+      <view class="form-item">
+        <view class="form-label">
+          <text class="label-text">留言内容</text>
+        </view>
+        <textarea 
+          class="form-textarea" 
+          name="message" 
+          value="{{formData.message}}"
+          placeholder="请输入您的留言或问题（选填）" 
+          maxlength="500"
+          bindinput="onMessageInput"
+        />
+        <view class="textarea-counter">{{formData.message.length}}/500</view>
+      </view>
+
+      <!-- 提交按钮 -->
+      <button 
+        class="submit-button" 
+        formType="submit"
+        disabled="{{submitting}}"
+      >
+        {{submitting ? '提交中...' : '提交申请'}}
+      </button>
+    </form>
+  </view>
+</view>

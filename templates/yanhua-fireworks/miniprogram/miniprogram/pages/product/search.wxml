@@ -1,0 +1,83 @@
+<view class="container">
+  <!-- 顶部导航栏 -->
+  <nav-bar title="搜索" showBack="{{true}}"></nav-bar>
+
+  <!-- 搜索框 -->
+  <view class="search-header">
+    <view class="search-container">
+      <view class="back-btn" bindtap="goBack">
+        <image src="/assets/icons/back-arrow.png" class="back-icon"></image>
+      </view>
+      <view class="search-box">
+        <input 
+          type="text" 
+          placeholder="搜索产品" 
+          value="{{keyword}}"
+          bindinput="onInput"
+          bindconfirm="doSearch"
+          focus="{{true}}"
+        />
+        <view class="search-btn" bindtap="doSearch">搜索</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 搜索建议 -->
+  <view class="suggestion-list" wx:if="{{suggestions.length > 0 && !searchResult}}">
+    <view 
+      class="suggestion-item" 
+      wx:for="{{suggestions}}" 
+      wx:key="index"
+      bindtap="selectSuggestion"
+      data-keyword="{{item}}"
+    >
+      <image src="/assets/icons/search-pink.png" class="suggestion-icon"></image>
+      <text>{{item}}</text>
+    </view>
+  </view>
+
+  <!-- 搜索历史 -->
+  <view class="history-section" wx:if="{{history.length > 0 && !keyword}}">
+    <view class="section-header">
+      <text class="section-title">搜索历史</text>
+      <text class="clear-btn" bindtap="clearHistory">清空</text>
+    </view>
+    <view class="history-list">
+      <view 
+        class="history-item" 
+        wx:for="{{history}}" 
+        wx:key="index"
+        bindtap="selectSuggestion"
+        data-keyword="{{item}}"
+      >{{item}}</view>
+    </view>
+  </view>
+
+  <!-- 搜索结果 -->
+  <view class="search-result" wx:if="{{searchResult}}">
+    <view class="result-header">
+      <text>搜索结果：{{resultList.length}}个产品</text>
+    </view>
+    <view class="product-grid">
+      <view 
+        class="product-card" 
+        wx:for="{{resultList}}" 
+        wx:key="id" 
+        bindtap="goDetail" 
+        data-id="{{item.id}}"
+      >
+        <image src="{{item.image}}" mode="aspectFill" class="product-img"></image>
+        <view class="product-info">
+          <text class="product-name">{{item.name}}</text>
+          <text class="product-code">{{item.code}}</text>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 空结果 -->
+    <view class="empty-result" wx:if="{{resultList.length === 0}}">
+      <image src="/assets/images/empty.png" class="empty-img"></image>
+      <text>未找到相关产品</text>
+    </view>
+  </view>
+</view>

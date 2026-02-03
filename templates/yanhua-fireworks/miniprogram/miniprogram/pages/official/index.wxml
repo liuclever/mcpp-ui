@@ -1,0 +1,99 @@
+<view class="container">
+  <!-- 顶图横幅（通过后台页面横幅管理） -->
+  <page-banner pageKey="official" position="top"></page-banner>
+
+  <!-- 品牌故事标题栏 -->
+  <view class="brand-story-title-bar">
+    <view class="title-line"></view>
+    <text class="title-text">品牌故事</text>
+    <view class="title-line"></view>
+  </view>
+
+  <!-- 品牌故事内容图片 -->
+  <view class="brand-story-section" wx:if="{{brandStory.imageUrl}}" bindtap="goBrandStory">
+    <image class="brand-story-img" src="{{brandStory.imageUrl}}" mode="widthFix"></image>
+  </view>
+
+  <!-- 首页视频区域 -->
+  <view class="video-section" wx:if="{{homeVideo.videoUrl}}">
+    <view class="video-container">
+      <!-- 视频封面（未播放时显示） -->
+      <block wx:if="{{!homeVideoPlaying}}">
+        <image class="video-cover" src="{{homeVideo.coverUrl}}" mode="aspectFill" bindtap="playHomeVideo"></image>
+        <view class="video-title">{{homeVideo.title}}</view>
+        <view class="play-btn" bindtap="playHomeVideo">
+          <image src="/assets/icons/play-big.png" class="play-icon"></image>
+        </view>
+      </block>
+      <!-- 内嵌视频播放器 -->
+      <video 
+        wx:if="{{homeVideoPlaying}}"
+        id="homeVideo"
+        class="inline-home-video"
+        src="{{homeVideo.videoUrl}}"
+        poster="{{homeVideo.coverUrl}}"
+        autoplay="{{true}}"
+        controls="{{true}}"
+        show-fullscreen-btn="{{true}}"
+        show-play-btn="{{true}}"
+        show-center-play-btn="{{true}}"
+        enable-progress-gesture="{{true}}"
+        enable-auto-rotation="{{true}}"
+        bindended="onHomeVideoEnded"
+        binderror="onHomeVideoError"
+        bindfullscreenchange="onFullscreenChange"
+      ></video>
+    </view>
+  </view>
+
+  <!-- 首页内容图片区域（按系列分组显示：品牌介绍、产品优势、合作支持等） -->
+  <view class="content-series-section" wx:for="{{contentSeries}}" wx:key="seriesName">
+    <!-- 系列图片（标题已在图片上制作） -->
+    <view class="series-images">
+      <image 
+        wx:for="{{item.images}}" 
+        wx:for-item="img"
+        wx:key="id" 
+        src="{{img.imageUrl}}" 
+        class="content-img" 
+        mode="widthFix"
+        bindtap="onContentImageTap"
+        data-item="{{img}}"
+      ></image>
+    </view>
+  </view>
+
+  <!-- 品牌故事列表区域 -->
+  <view class="brand-stories-section" wx:if="{{brandStories.length > 0}}">
+    <view class="section-title-bar">
+      <view class="title-line"></view>
+      <text class="title-text">品牌故事</text>
+      <view class="title-line"></view>
+    </view>
+    
+    <view class="brand-stories-list">
+      <view 
+        class="brand-story-item" 
+        wx:for="{{brandStories}}" 
+        wx:key="id"
+        bindtap="goBrandStoryDetail"
+        data-id="{{item.id}}"
+      >
+        <view class="story-title">{{item.title}}</view>
+        <view class="story-summary">{{item.summary}}</view>
+        <view class="story-meta">
+          <text class="story-views">👁️ {{item.viewCount || 0}} 人阅读</text>
+          <text class="story-time">{{item.createTime}}</text>
+        </view>
+      </view>
+    </view>
+    
+    <view class="view-more-section" bindtap="goMoreBrandStories">
+      <text class="view-more-text">查看更多</text>
+      <text class="view-more-arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 底图横幅（通过后台页面横幅管理） -->
+  <page-banner pageKey="official" position="bottom"></page-banner>
+</view>
